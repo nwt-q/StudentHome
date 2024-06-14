@@ -1,0 +1,5 @@
+﻿  StudentView.cpp
+D:\creatdome\onedome\demo\StudentCard\StudentHome\StudentHome\StudentHome\StudentView.cpp(74,10): warning C4101: “s”: 未引用的局部变量
+  main.cpp
+  正在生成代码...
+  StudentHome.vcxproj -> D:\creatdome\onedome\demo\StudentCard\StudentHome\StudentHome\x64\Debug\StudentHome.exe
