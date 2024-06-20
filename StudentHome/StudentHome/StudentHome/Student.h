@@ -25,8 +25,6 @@
 #define MAXN 10
 // -------------------- 数据设计 --------------------
 
-
-
 // -------------------- service --------------------
 
 
@@ -34,7 +32,7 @@
 bool resign(std::string name, std::string power);
 
 // 注册账号
-bool sign(std::string name, std::string power);
+bool Sign(std::string name, std::string power);
 
 // 登入账号
 bool Login(std::string name, std::string power);
@@ -51,6 +49,16 @@ void WorkSendown();
 //作业提交
 void WorkSendTo();
 
+//void TextBox(int x, int y, int width, int height, int maxWord);//构造函数
+//const wstring& getText();  //查看private成员text
+//bool getSelect();          //查看private成员isSelected
+//bool isEmpty();            //检查输入内容是否为空
+//void clear();              //清空输入
+//void setText(const wstring& newText);
+//void draw();               //显示用户输入的字符以及光标
+//bool checkClick(int mouseX, int mouseY);  //在鼠标已点击的前提下，检查鼠标是否在文本框范围内
+//void keyInput(wchar_t ch); //输入字符
+//void updateCursor();       //光标显示状态
 
 void T();
 // -------------------- view --------------------

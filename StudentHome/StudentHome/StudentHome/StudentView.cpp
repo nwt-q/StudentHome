@@ -19,6 +19,9 @@
 
 #include "StudentView.h"
 
+std::string inputUser = "";  // 存储输入文本的变量
+
+// 用于读取特定区域的鼠标信息(绿色)
 namespace gxb
 {
     const int BUTTONX = 550;
@@ -42,42 +45,355 @@ namespace gxb
     }
 }
 
-//学生登入视图
-void LoginView() {
-    // 初始化图形模式
-    initgraph(1280, 720);
-    IMAGE img;/*声明一个IMAGE变量*/
-    loadimage(&img, "../../../Photo/18.png", 1280, 720);/*变量地址，图片地址    相对地址“./”本目录下的文件进行访问   图片展示可以是png也可以是jpg*/
-    putimage(0, 0, &img);/*展示图片*/
-    // 设置文本样式
-    setbkmode(TRANSPARENT);  // 用于解决黑色背景图
-    settextstyle(30, 0, _T("黑体")); // TRANSPARENT
-    settextcolor(BLACK);
-    outtextxy(240, 100, _T("学生登录"));
-    settextstyle(20, 0, _T("宋体"));
+//-----------------登入页面设计----------------
 
-    // 绘制输入框
-    rectangle(320, 190, 580, 220);
-    rectangle(320, 250, 580, 280);
+/*
+    负责人：
+    功能：设计文本框控件
+*/
 
-    // 定义用户名和密码变量
-    char username[20] = "";
-    char password[20] = "";
+struct EasyTextBox 
+{
+    int left = 0, top = 0, right = 0, bottom = 0; // 控件坐标
+    char* text = NULL;                         // 控件内容
+    unsigned __int64 maxlen = 0;                 // 文本框最大内容长度
+};
 
-    // 输入用户名
-    settextstyle(20, 0, _T("宋体"));
-    outtextxy(180, 200, _T("用户名："));
-    // 输入密码
-    settextstyle(20, 0, _T("宋体"));
-    outtextxy(180, 260, _T("密码："));
-    //  学生登入模块
-    char s[10];
-    while (true);
-    // 关闭图形模式
-    closegraph();
-    return;
 
+/*
+    负责人：
+    功能：绘制用户界面
+    参数：void
+    返回值：void
+*/
+
+void EasyTextBoxShow(EasyTextBox* NEW) {
+    // 备份环境值
+    int oldlinecolor = getlinecolor();
+    int oldbkcolor = getbkcolor();
+    int oldfillcolor = getfillcolor();
+
+    setlinecolor(LIGHTGRAY);		// 设置画线颜色
+    setbkcolor(0xeeeeee);			// 设置背景颜色
+    setfillcolor(0xeeeeee);			// 设置填充颜色
+    fillrectangle(NEW->left, NEW->top, NEW->right, NEW->bottom);  // 绘制矩形 
+    outtextxy(NEW->left + 10, NEW->top + 5, _T(NEW->text)); // 显示文本
+
+    // 恢复环境值
+    setlinecolor(oldlinecolor);
+    setbkcolor(oldbkcolor);
+    setfillcolor(oldfillcolor);
 }
+
+
+/*
+    负责人：
+    功能：用于初始化数据
+    参数：x1,y1,x2,y2, maxn
+    返回值：void
+*/
+
+EasyTextBox EasyTextBoxCreate(int x1, int y1, int x2, int y2, int maxn) {
+    EasyTextBox NEW = { x1 , y1, x2, y2,NULL,maxn}; // 初始化坐标以及最大值
+    NEW.text = new char[NEW.maxlen];  // 创建一个最大长度数组, 函数销毁时可能出现问题
+    NEW.text[0] = 0; // 将文本放置于 0
+    // 绘制用户界面
+    EasyTextBoxShow(&NEW);
+    return NEW;
+}
+
+
+/*
+    负责人：
+    功能：检查是否越界超过最大输入长度
+    参数：EasyTextBox* NEW, int x, int y
+    返回值：bool
+*/
+bool EasyTextBoxCheck(EasyTextBox* NEW, int x, int y) {
+    return (NEW->right >= x && NEW->left <= x && NEW->top <= y && NEW->bottom >= y);
+}
+
+/*
+    负责人：
+    功能：删除元素数据
+    参数：EasyTextBox* NEW
+    返回值：bool
+*/
+void EasyTextBoxDelete(EasyTextBox* NEW) {
+    if (NEW->text != NULL) {
+        delete[] NEW->text;
+    }
+}
+
+/*
+    负责人：
+    功能：鼠标点击事件 & 光标定位
+    参数：EasyTextBox* NEW
+    返回值：bool
+*/
+void EasyTextBoxOnMessage(EasyTextBox* NEW)
+{
+    // 备份环境值
+    int oldlinecolor = getlinecolor();
+    int oldbkcolor = getbkcolor();
+    int oldfillcolor = getfillcolor();
+
+    setlinecolor(BLACK);			// 设置画线颜色
+    setbkcolor(WHITE);				// 设置背景颜色
+    setfillcolor(WHITE);			// 设置填充颜色
+    fillrectangle(NEW->left, NEW->top, NEW->right, NEW->bottom);
+    outtextxy(NEW->left + 10, NEW->top + 5, NEW->text);
+
+    int width = textwidth(NEW->text);	// 字符串总宽度
+    int counter = 0;				// 光标闪烁计数器
+    bool binput = true;				// 是否输入中
+
+    ExMessage msg; // 检查鼠标点击事件
+    while (binput)
+    {
+        while (binput && peekmessage(&msg, EX_MOUSE | EX_CHAR, false))	// 获取消息，但不从消息队列拿出
+        {
+            if (msg.message == WM_LBUTTONDOWN)
+            {
+                // 如果鼠标点击文本框外面，结束文本输入
+                if (msg.x < NEW->left || msg.x > NEW->right || msg.y < NEW->top || msg.y > NEW->bottom)
+                {
+                    binput = false;
+                    break;
+                }
+            }
+            else if (msg.message == WM_CHAR)
+            {
+                size_t len = strlen(NEW->text);
+                switch (msg.ch)
+                {
+                case '\b':				// 用户按退格键，删掉一个字符
+                    if (len > 0)
+                    {
+                        NEW->text[len - 1] = 0;
+                        width = textwidth(NEW->text);
+                        counter = 0;
+                        clearrectangle(NEW->left + 10 + width, NEW->top + 1, NEW->right - 1, NEW->bottom - 1);
+                    }
+                    break;
+                case '\r':				// 用户按回车键，结束文本输入
+                case '\n':
+                    binput = false;
+                    break;
+                default:				// 用户按其它键，接受文本输入
+                    if (len < NEW->maxlen - 1)
+                    {
+                        NEW->text[len++] = msg.ch;
+                        NEW->text[len] = 0;
+
+                        clearrectangle(NEW->left + 10 + width + 1, NEW->top + 3, NEW->left + 10 + width + 1, NEW->bottom - 3);	// 清除画的光标
+                        width = textwidth(NEW->text);				// 重新计算文本框宽度
+                        counter = 0;
+                        outtextxy(NEW->left + 10, NEW->top + 5, NEW->text);		// 输出新的字符串
+                    }
+                }
+            }
+            peekmessage(NULL, EX_MOUSE | EX_CHAR);				// 从消息队列抛弃刚刚处理过的一个消息
+        }
+
+        // 绘制光标（光标闪烁周期为 20ms * 32）
+        counter = (counter + 1) % 32;
+        if (counter < 16)
+            line(NEW->left + 10 + width + 1, NEW->top + 3, NEW->left + 10 + width + 1, NEW->bottom - 3);				// 画光标
+        else
+            clearrectangle(NEW->left + 10 + width + 1, NEW->top + 3, NEW->left + 10 + width + 1, NEW->bottom - 3);		// 擦光标
+
+        // 延时 20ms
+        Sleep(20);
+    }
+}
+
+//----------------实现按键控件EasyButton-------------
+struct EasyButton {
+    int left = 0, top = 0, right = 0, bottom = 0;	// 控件坐标
+    char* text = NULL;							// 控件内容
+    void (*userfunc)() = NULL;						// 控件消息
+};
+
+/*
+    负责人：
+    功能：绘制界面
+    参数：EasyButton* NEW
+    返回值：void
+*/
+void EasyButtonShow(EasyButton* NEW)
+{
+    // 备份环境
+    int oldlinecolor = getlinecolor();
+    int oldbkcolor = getbkcolor();
+    int oldfillcolor = getfillcolor();
+
+    setlinecolor(BLACK);			// 设置画线颜色
+    setbkcolor(WHITE);				// 设置背景颜色
+    setfillcolor(WHITE);			// 设置填充颜色
+    fillrectangle(NEW->left, NEW->top, NEW->right, NEW->bottom);
+    outtextxy(NEW->left + (NEW->right - NEW->left - textwidth(NEW->text) + 1) / 2, NEW->top + (NEW->bottom - NEW->top - textheight(NEW->text) + 1) / 2, NEW->text);
+    //恢复环境
+    setlinecolor(oldlinecolor);
+    setbkcolor(oldbkcolor);
+    setfillcolor(oldfillcolor);
+}
+
+/*
+    负责人：
+    功能：用于初始化数据
+    参数：x1,y1,x2,y2, title  (*func)()
+    返回值：void
+*/
+EasyButton EasyButtonCreate(int x1, int y1, int x2, int y2, const char* title, void (*func)())
+{
+    EasyButton NEW = {x1,y1,x2,y2,NULL,NULL};
+    NEW.text = new char[strlen(title) + 1];
+    strcpy_s(NEW.text, strlen(title) + 1, title);
+    NEW.left = x1, NEW.top = y1, NEW.right = x2, NEW.bottom = y2;
+    NEW.userfunc = func;
+
+    // 绘制用户界面
+    EasyButtonShow(&NEW);
+    return NEW;
+}
+
+/*
+    负责人：
+    功能：删除元素数据
+    参数：EasyTextBox* NEW
+    返回值：bool
+*/
+void EasyButtonDelete(EasyButton* NEW)
+{
+    if (NEW->text != NULL)
+        delete[] NEW->text;
+}
+
+/*
+    负责人：
+    功能：查看是否在区域内
+    参数：EasyTextBox* NEW
+    返回值：bool
+*/
+bool EasyButtonCheck(EasyButton* NEW ,int x, int y)
+{
+    return (NEW->left <= x && x <= NEW->right && NEW->top <= y && y <= NEW->bottom);
+}
+
+
+
+void EasyButtonOnMessage(EasyButton* NEW)
+{
+    if (NEW->userfunc != NULL)
+        NEW->userfunc();
+}
+
+// 定义控件
+EasyTextBox txtName;
+EasyTextBox txtPwd;
+EasyButton btnOK;
+
+/*
+    负责人：
+    功能：确定是否登入成功,按钮 btnOK 的点击事件
+    参数：EasyTextBox* NEW
+    返回值：bool
+*/
+void On_btnOk_Click()
+{
+    if (strcmp("123456", txtPwd.text))
+        MessageBox(GetHWnd(), "密码错误", "错误", MB_OK);
+    else // 如果登入成功
+    {
+        char s[100] = "Hello, ";
+        strcmp(s, txtName.text);
+        MessageBox(GetHWnd(), s, "Hello", MB_OK); // 消息弹窗
+    }
+}
+
+
+// ------------------------------------------------
+
+/*
+    负责人：
+    功能：学生登入视图,绘制登录界面
+    参数：void
+    返回值：void
+*/
+void LoginView() {
+ //   // 初始化图形模式
+ //   IMAGE img;/*声明一个IMAGE变量*/
+ //   loadimage(&img, "../../../Photo/18.png", 1280, 720);/*变量地址，图片地址    相对地址“./”本目录下的文件进行访问   图片展示可以是png也可以是jpg*/
+ //   putimage(0, 0, &img);/*展示图片*/
+ //   setbkmode(TRANSPARENT); // 用于解决黑色背景图
+ //   settextcolor(BLACK); // 设置字体颜色
+ //   settextstyle(77, 0, _T("微软雅黑"));
+ //   outtextxy(447, 173, _T("学生通知系统"));
+
+ //   settextstyle(40, 0, _T("微软雅黑"));//下面是文本框左侧的文本绘制
+ //   LPCTSTR  str1 = _T("账号：");
+ //   // 绘制输入框
+ //   int x1 = 463 - textwidth(str1);
+ //   int y1 = 359 + (64 - textheight(str1)) / 2;
+ //   LPCTSTR str2 = _T("密码：");
+ //   int x2 = x1;
+ //   int y2 = 434 + (64 - textheight(str1)) / 2; // 相对位置
+ //   outtextxy(x1, y1, _T(str1));// 显示账号标签
+ //   outtextxy(x2, y2, _T(str2));// 显示密码标签
+
+ //   // 绘制文本框
+ //// 假设文本框的宽度为300，高度为40
+ //   int textboxWidth = 300;
+ //   int textboxHeight = 40;
+ //   // 绘制账号文本框
+ //   rectangle(x1 + 100, y1 - textboxHeight / 2 + 15, x1 + textboxWidth + 100, y1 + textboxHeight / 2 + 15);
+ //   // 绘制密码文本框
+ //   rectangle(x2 + 100, y2 - textboxHeight / 2 + 15, x2 + textboxWidth + 100, y2 + textboxHeight / 2 + 15);
+
+    // 简单绘制界面
+    //setbkcolor(0xeeeeee);
+    cleardevice();  // 顺便可以消除鼠标
+    IMAGE img;/*声明一个IMAGE变量*/
+   loadimage(&img, "../../../Photo/18.png", 1280, 720);/*变量地址，图片地址    相对地址“./”本目录下的文件进行访问   图片展示可以是png也可以是jpg*/
+   putimage(0, 0, &img);/*展示图片*/
+   setbkmode(TRANSPARENT); // 用于解决黑色背景图
+    settextcolor(BLACK);
+    outtextxy(50, 55, "用户名：");
+    txtName = EasyTextBoxCreate(120, 50, 400, 75, 10);        // 创建用户名文本框控件
+    outtextxy(50, 105, "密　码：");
+    txtPwd = EasyTextBoxCreate(120, 100, 400, 125, 10);						// 创建密码文本框控件
+    btnOK = EasyButtonCreate(320, 150, 400, 175, "OK", On_btnOk_Click);	// 创建按钮控件
+
+    ExMessage msg;
+    while (true)
+    {
+        msg = getmessage(EX_MOUSE);			// 获取消息输入
+
+        if (msg.message == WM_LBUTTONDOWN)
+        {
+            // 判断控件
+            if (EasyTextBoxCheck(&txtName,msg.x, msg.y))	EasyTextBoxOnMessage(&txtName);
+
+            // 判断控件
+            if (EasyTextBoxCheck(&txtPwd,msg.x, msg.y))		EasyTextBoxOnMessage(&txtPwd);
+
+            // 判断控件
+            if (EasyButtonCheck(&btnOK,msg.x, msg.y))	EasyButtonOnMessage(&btnOK);
+        }
+    }
+    return;
+}
+
+
+//------------------------------------------------------------
+
+/*
+    负责人：
+    功能：放置点击的Button
+    参数：void
+    返回值：void
+*/
 
 void StudentshowButton(int x, int y, int width, int height, std::string str, int textSize,Color fillColor, Color textColor)			//默认黑底，白字
 {
@@ -91,7 +407,12 @@ void StudentshowButton(int x, int y, int width, int height, std::string str, int
     outtextxy(x + w, y + h, str.c_str());
 }
 
-//学生页面用于页面切换
+/*
+    负责人：
+    功能：学生页面用于页面切换
+    参数：void
+    返回值：void
+*/
 void StudentmenuView() {
     using namespace gxb;
     //initgraph(1280, 720);
@@ -104,7 +425,7 @@ void StudentmenuView() {
     StudentshowButton(BUTTONX, 250, BUTTONW, BUTTONH, "游戏空间", 48, fillColor, textColor);
     StudentshowButton(BUTTONX, 400, BUTTONW, BUTTONH, "全局设置", 48, fillColor, textColor);
     StudentshowButton(BUTTONX, 550, BUTTONW, BUTTONH, "退出登入", 48, fillColor, textColor);
-
+    /*用于页面跳转*/
     while (true) {
         Sleep(200);
         while (peekmessage(&msg, EM_MOUSE))
@@ -128,8 +449,6 @@ void StudentmenuView() {
             }
         }
     }
-    // 关闭图形模式
-    closegraph();
 }
 
 

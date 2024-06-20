@@ -27,8 +27,13 @@
 
 // -------------------- service --------------------
 
-// 学生页面登入窗口
+
+// ------ 学生页面登入注册模块窗口------------------
 void LoginView();
+
+
+
+//-------------------------------------------------
 
 //放置按钮
 void StudentshowButton(int x, int y, int width, int height, std::string str, int textSize, Color fillColor, Color textColor);

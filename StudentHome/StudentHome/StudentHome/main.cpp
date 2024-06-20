@@ -29,8 +29,11 @@
 
 
 int main() {
+	initgraph(1280, 720, SHOWCONSOLE);
 	T();
 	LoginView();
 	//StudentmenuView();
-    return 0;
+	// 关闭图形模式
+	closegraph();
+	return 0;
 }

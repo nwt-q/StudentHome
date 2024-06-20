@@ -1,5 +1,5 @@
 ﻿  StudentView.cpp
-D:\creatdome\onedome\demo\StudentCard\StudentHome\StudentHome\StudentHome\StudentView.cpp(74,10): warning C4101: “s”: 未引用的局部变量
+D:\creatdome\onedome\demo\StudentHome\StudentHome\StudentHome\StudentHome\StudentView.cpp(97,46): warning C4838: 从“int”转换到“unsigned __int64”需要收缩转换
   main.cpp
   正在生成代码...
-  StudentHome.vcxproj -> D:\creatdome\onedome\demo\StudentCard\StudentHome\StudentHome\x64\Debug\StudentHome.exe
+  StudentHome.vcxproj -> D:\creatdome\onedome\demo\StudentHome\StudentHome\StudentHome\x64\Debug\StudentHome.exe
