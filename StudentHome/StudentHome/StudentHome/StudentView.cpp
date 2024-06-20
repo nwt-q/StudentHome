@@ -59,7 +59,6 @@ struct EasyTextBox
     unsigned __int64 maxlen = 0;                 // 文本框最大内容长度
 };
 
-
 /*
     负责人：
     功能：绘制用户界面
@@ -252,7 +251,6 @@ EasyButton EasyButtonCreate(int x1, int y1, int x2, int y2, const char* title, v
     strcpy_s(NEW.text, strlen(title) + 1, title);
     NEW.left = x1, NEW.top = y1, NEW.right = x2, NEW.bottom = y2;
     NEW.userfunc = func;
-
     // 绘制用户界面
     EasyButtonShow(&NEW);
     return NEW;
@@ -293,7 +291,7 @@ void EasyButtonOnMessage(EasyButton* NEW)
 EasyTextBox txtName;
 EasyTextBox txtPwd;
 EasyButton btnOK;
-
+bool Page = false;
 /*
     负责人：
     功能：确定是否登入成功,按钮 btnOK 的点击事件
@@ -306,9 +304,8 @@ void On_btnOk_Click()
         MessageBox(GetHWnd(), "密码错误", "错误", MB_OK);
     else // 如果登入成功
     {
-        char s[100] = "Hello, ";
-        strcmp(s, txtName.text);
-        MessageBox(GetHWnd(), s, "Hello", MB_OK); // 消息弹窗
+        MessageBox(GetHWnd(),txtName.text, "Hello", MB_OK); // 消息弹窗
+        StudentmenuView();
     }
 }
 
@@ -322,48 +319,20 @@ void On_btnOk_Click()
     返回值：void
 */
 void LoginView() {
- //   // 初始化图形模式
- //   IMAGE img;/*声明一个IMAGE变量*/
- //   loadimage(&img, "../../../Photo/18.png", 1280, 720);/*变量地址，图片地址    相对地址“./”本目录下的文件进行访问   图片展示可以是png也可以是jpg*/
- //   putimage(0, 0, &img);/*展示图片*/
- //   setbkmode(TRANSPARENT); // 用于解决黑色背景图
- //   settextcolor(BLACK); // 设置字体颜色
- //   settextstyle(77, 0, _T("微软雅黑"));
- //   outtextxy(447, 173, _T("学生通知系统"));
-
- //   settextstyle(40, 0, _T("微软雅黑"));//下面是文本框左侧的文本绘制
- //   LPCTSTR  str1 = _T("账号：");
- //   // 绘制输入框
- //   int x1 = 463 - textwidth(str1);
- //   int y1 = 359 + (64 - textheight(str1)) / 2;
- //   LPCTSTR str2 = _T("密码：");
- //   int x2 = x1;
- //   int y2 = 434 + (64 - textheight(str1)) / 2; // 相对位置
- //   outtextxy(x1, y1, _T(str1));// 显示账号标签
- //   outtextxy(x2, y2, _T(str2));// 显示密码标签
-
- //   // 绘制文本框
- //// 假设文本框的宽度为300，高度为40
- //   int textboxWidth = 300;
- //   int textboxHeight = 40;
- //   // 绘制账号文本框
- //   rectangle(x1 + 100, y1 - textboxHeight / 2 + 15, x1 + textboxWidth + 100, y1 + textboxHeight / 2 + 15);
- //   // 绘制密码文本框
- //   rectangle(x2 + 100, y2 - textboxHeight / 2 + 15, x2 + textboxWidth + 100, y2 + textboxHeight / 2 + 15);
 
     // 简单绘制界面
     //setbkcolor(0xeeeeee);
     cleardevice();  // 顺便可以消除鼠标
     IMAGE img;/*声明一个IMAGE变量*/
-   loadimage(&img, "../../../Photo/18.png", 1280, 720);/*变量地址，图片地址    相对地址“./”本目录下的文件进行访问   图片展示可以是png也可以是jpg*/
-   putimage(0, 0, &img);/*展示图片*/
-   setbkmode(TRANSPARENT); // 用于解决黑色背景图
+    loadimage(&img, "../../../Photo/18.png", 1280, 720);/*变量地址，图片地址    相对地址“./”本目录下的文件进行访问   图片展示可以是png也可以是jpg*/
+    putimage(0, 0, &img);/*展示图片*/
+    setbkmode(TRANSPARENT); // 用于解决黑色背景图
     settextcolor(BLACK);
-    outtextxy(50, 55, "用户名：");
+    outtextxy(55, 55, "用户名：");
     txtName = EasyTextBoxCreate(120, 50, 400, 75, 10);        // 创建用户名文本框控件
-    outtextxy(50, 105, "密　码：");
+    outtextxy(55, 105, "密　码：");
     txtPwd = EasyTextBoxCreate(120, 100, 400, 125, 10);						// 创建密码文本框控件
-    btnOK = EasyButtonCreate(320, 150, 400, 175, "OK", On_btnOk_Click);	// 创建按钮控件
+    btnOK = EasyButtonCreate(320, 150, 400, 175, "Login", On_btnOk_Click);	// 创建按钮控件
 
     ExMessage msg;
     while (true)
@@ -385,8 +354,7 @@ void LoginView() {
     return;
 }
 
-
-//------------------------------------------------------------
+//-----------------登入页面设计----------------
 
 /*
     负责人：
@@ -445,6 +413,10 @@ void StudentmenuView() {
             }
             if (msg.message == WM_LBUTTONDOWN && inArea(msg.x, msg.y, BUTTONX, 550, BUTTONW, BUTTONH))
             {
+                if (Page) {
+                    Page = false;
+                    StudentmenuView();
+                }
                 exit(0);
             }
         }
@@ -464,6 +436,12 @@ void StudentSettingView() {
     StudentshowButton(BUTTONX, 250, BUTTONW, BUTTONH, "背景设置", 48, fillColor, textColor);
     StudentshowButton(BUTTONX, 400, BUTTONW, BUTTONH, "打开音乐", 48, fillColor, textColor);
     StudentshowButton(BUTTONX, 550, BUTTONW, BUTTONH, "退出", 48, fillColor, textColor);
+
+    // 此处无法处理鼠标信息
+    if (msg.message == WM_LBUTTONDOWN && inArea(msg.x, msg.y, BUTTONX, 550, BUTTONW, BUTTONH)) {
+        Page = true;
+        return;
+    }
 }
 
 // 学生计时专注页面

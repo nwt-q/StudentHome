@@ -150,7 +150,6 @@ void WorkSendTo() {
 
 }
 
-
 //ÓÃ»§×¢²áÄ£¿é
 bool Sign(std::string name, std::string power) {
 	student[UserCount].name = name;
