@@ -23,14 +23,14 @@
 #undef UNICODE
 #undef _UNICODE
 /*
-* 传建者 : 书山(EvLast)
-* 创建时间 : 2024/6/6 12:10:55
+* 麓芦陆篓脮脽 : 脢茅脡陆(EvLast)
+* 麓麓陆篓脢卤录盲 : 2024/6/6 12:10:55
 */
 
 
 int main() {
 	T();
-	LoginView();
-	//StudentmenuView();
+	//LoginView();
+	StudentmenuView();
     return 0;
 }
