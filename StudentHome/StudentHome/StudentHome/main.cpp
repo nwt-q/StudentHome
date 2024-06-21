@@ -35,7 +35,6 @@ int main() {
 	//StudentmenuView();
 	// 关闭图形模式
 	closegraph();
-	return 0;
 	//LoginView();
 	StudentmenuView();
     return 0;

@@ -34,6 +34,7 @@ namespace gxb
 
     //定义消息结构体变量
     ExMessage msg;
+    ExMessage mg;
     //鼠标是否在矩形内 
     bool inArea(int mx, int my, int x, int y, int w, int h) //用于捕获鼠标点击事件
     {
@@ -51,7 +52,6 @@ namespace gxb
     负责人：
     功能：设计文本框控件
 */
-
 struct EasyTextBox 
 {
     int left = 0, top = 0, right = 0, bottom = 0; // 控件坐标
@@ -92,7 +92,7 @@ void EasyTextBoxShow(EasyTextBox* NEW) {
     返回值：void
 */
 
-EasyTextBox EasyTextBoxCreate(int x1, int y1, int x2, int y2, int maxn) {
+EasyTextBox EasyTextBoxCreate(int x1, int y1, int x2, int y2, int maxn) {   // 其中的x1, y1, x2, y2
     EasyTextBox NEW = { x1 , y1, x2, y2,NULL,maxn}; // 初始化坐标以及最大值
     NEW.text = new char[NEW.maxlen];  // 创建一个最大长度数组, 函数销毁时可能出现问题
     NEW.text[0] = 0; // 将文本放置于 0
@@ -100,7 +100,6 @@ EasyTextBox EasyTextBoxCreate(int x1, int y1, int x2, int y2, int maxn) {
     EasyTextBoxShow(&NEW);
     return NEW;
 }
-
 
 /*
     负责人：
@@ -141,7 +140,7 @@ void EasyTextBoxOnMessage(EasyTextBox* NEW)
     setbkcolor(WHITE);				// 设置背景颜色
     setfillcolor(WHITE);			// 设置填充颜色
     fillrectangle(NEW->left, NEW->top, NEW->right, NEW->bottom);
-    outtextxy(NEW->left + 10, NEW->top + 5, NEW->text);
+    outtextxy(NEW->left + 20, NEW->top + 15, NEW->text);
 
     int width = textwidth(NEW->text);	// 字符串总宽度
     int counter = 0;				// 光标闪烁计数器
@@ -279,8 +278,12 @@ bool EasyButtonCheck(EasyButton* NEW ,int x, int y)
     return (NEW->left <= x && x <= NEW->right && NEW->top <= y && y <= NEW->bottom);
 }
 
-
-
+/*
+    负责人：
+    功能：调用返回函数
+    参数：EasyTextBox* NEW
+    返回值：bool
+*/
 void EasyButtonOnMessage(EasyButton* NEW)
 {
     if (NEW->userfunc != NULL)
@@ -292,6 +295,7 @@ EasyTextBox txtName;
 EasyTextBox txtPwd;
 EasyButton btnOK;
 bool Page = false;
+
 /*
     负责人：
     功能：确定是否登入成功,按钮 btnOK 的点击事件
@@ -308,8 +312,6 @@ void On_btnOk_Click()
         StudentmenuView();
     }
 }
-
-
 // ------------------------------------------------
 
 /*
@@ -328,11 +330,17 @@ void LoginView() {
     putimage(0, 0, &img);/*展示图片*/
     setbkmode(TRANSPARENT); // 用于解决黑色背景图
     settextcolor(BLACK);
-    outtextxy(55, 55, "用户名：");
-    txtName = EasyTextBoxCreate(120, 50, 400, 75, 10);        // 创建用户名文本框控件
-    outtextxy(55, 105, "密　码：");
-    txtPwd = EasyTextBoxCreate(120, 100, 400, 125, 10);						// 创建密码文本框控件
-    btnOK = EasyButtonCreate(320, 150, 400, 175, "Login", On_btnOk_Click);	// 创建按钮控件
+    settextstyle(60, 0, _T("华文新魏"));//设置字号、字体
+    outtextxy(400, 200, "6月26日课设项目");
+    settextstyle(40, 0, _T("华文新魏"));//设置字号、字体
+    outtextxy(280, 340, "用户名：");
+    txtName = EasyTextBoxCreate(400, 330, 700, 375, 10);        // 创建用户名文本框控件
+    settextstyle(40, 0, _T("华文新魏"));//设置字号、字体
+    outtextxy(280, 400, "密　码：");
+    txtPwd = EasyTextBoxCreate(400, 400, 700, 445, 10);						// 创建密码文本框控件
+    settextstyle(15, 0,"");//设置字号、字体
+    btnOK = EasyButtonCreate(620, 470, 700, 495, "Login", On_btnOk_Click);	// 创建按钮控件
+    settextstyle(30, 0, "");//设置字号、字体
 
     ExMessage msg;
     while (true)
@@ -362,7 +370,6 @@ void LoginView() {
     参数：void
     返回值：void
 */
-
 void StudentshowButton(int x, int y, int width, int height, std::string str, int textSize,Color fillColor, Color textColor)			//默认黑底，白字
 {
     setfillcolor(RGB(fillColor.R, fillColor.G, fillColor.B));
@@ -413,16 +420,16 @@ void StudentmenuView() {
             }
             if (msg.message == WM_LBUTTONDOWN && inArea(msg.x, msg.y, BUTTONX, 550, BUTTONW, BUTTONH))
             {
-                if (Page) {
-                    Page = false;
-                    StudentmenuView();
+                if (Page == false) {
+                   // Page = false;
+                   /* StudentmenuView();*/
+                    continue;
                 }
                 exit(0);
             }
         }
     }
 }
-
 
 //学生设置页面
 void StudentSettingView() {
@@ -435,12 +442,13 @@ void StudentSettingView() {
     StudentshowButton(BUTTONX, 100, BUTTONW, BUTTONH, "技术人员", 48, fillColor, textColor);
     StudentshowButton(BUTTONX, 250, BUTTONW, BUTTONH, "背景设置", 48, fillColor, textColor);
     StudentshowButton(BUTTONX, 400, BUTTONW, BUTTONH, "打开音乐", 48, fillColor, textColor);
-    StudentshowButton(BUTTONX, 550, BUTTONW, BUTTONH, "退出", 48, fillColor, textColor);
-
+    StudentshowButton(BUTTONX, 550, BUTTONW, BUTTONH, "返回菜单", 48, fillColor, textColor);
     // 此处无法处理鼠标信息
-    if (msg.message == WM_LBUTTONDOWN && inArea(msg.x, msg.y, BUTTONX, 550, BUTTONW, BUTTONH)) {
-        Page = true;
-        return;
+    while (peekmessage(&msg, EM_MOUSE)) {
+        if (mg.message == WM_LBUTTONDOWN && mg.x > BUTTONX && mg.y > 550 && mg.x < BUTTONX + BUTTONW && mg.y < 550 + BUTTONH) {
+            Page = true;
+            return;
+        }
     }
 }
 

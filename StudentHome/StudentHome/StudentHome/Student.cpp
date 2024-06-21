@@ -34,9 +34,9 @@ struct User {
 User student[MAXN];
 
 // 当前用户数量
-int UserCount = 0;
+extern int UserCount = 0;
 //用于时间统计
-int tim = 0; 
+extern int tim = 0;
 
 
 //实现用户登入操作
