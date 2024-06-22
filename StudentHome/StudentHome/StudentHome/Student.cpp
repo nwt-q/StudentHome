@@ -132,7 +132,7 @@ double timer() {	// 专门设置时间
 	InputBox(a, 10, "输入专注时间");
 	tim = atoi(a);
 	std::cout << tim << "\n";
-	Sleep(tim);
+	Sleep(tim*1000);
 	double end = clock();
 	std::cout << start << " " << end << "\n";
 	double last = end - start;

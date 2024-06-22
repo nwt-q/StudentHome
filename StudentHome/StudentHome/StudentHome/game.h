@@ -959,7 +959,7 @@ namespace gameqoqo {
 	void gameStart()
 	{
 		using namespace ldk;
-		init();
+		Gameinit();
 		mapDeltaX = windowsWidth / 2.0 - getScale(Gamer.x);			//地图X方向偏移量
 		mapDeltaY = windowsHeight / 2.0 - getScale(Gamer.y);
 

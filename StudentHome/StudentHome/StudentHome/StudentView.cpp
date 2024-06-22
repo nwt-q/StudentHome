@@ -34,7 +34,6 @@ namespace gxb
 
     //定义消息结构体变量
     ExMessage msg;
-    ExMessage mg;
     //鼠标是否在矩形内 
     bool inArea(int mx, int my, int x, int y, int w, int h) //用于捕获鼠标点击事件
     {
@@ -294,7 +293,7 @@ void EasyButtonOnMessage(EasyButton* NEW)
 EasyTextBox txtName;
 EasyTextBox txtPwd;
 EasyButton btnOK;
-bool Page = false;
+int Page = 1;
 
 /*
     负责人：
@@ -388,6 +387,8 @@ void StudentshowButton(int x, int y, int width, int height, std::string str, int
     参数：void
     返回值：void
 */
+
+
 void StudentmenuView() {
     using namespace gxb;
     //initgraph(1280, 720);
@@ -420,14 +421,15 @@ void StudentmenuView() {
             }
             if (msg.message == WM_LBUTTONDOWN && inArea(msg.x, msg.y, BUTTONX, 550, BUTTONW, BUTTONH))
             {
-                if (Page == false) {
-                   // Page = false;
-                   /* StudentmenuView();*/
-                    continue;
-                }
-                exit(0);
+                Page = 0;
+                LoginView();
             }
         }
+        //switch (Page) {
+        //case 0: exit(0); break;
+        //case 1: StudentmenuView(); break;
+        //case 2: TimeView(); break;
+        //}
     }
 }
 
@@ -443,11 +445,28 @@ void StudentSettingView() {
     StudentshowButton(BUTTONX, 250, BUTTONW, BUTTONH, "背景设置", 48, fillColor, textColor);
     StudentshowButton(BUTTONX, 400, BUTTONW, BUTTONH, "打开音乐", 48, fillColor, textColor);
     StudentshowButton(BUTTONX, 550, BUTTONW, BUTTONH, "返回菜单", 48, fillColor, textColor);
-    // 此处无法处理鼠标信息
-    while (peekmessage(&msg, EM_MOUSE)) {
-        if (mg.message == WM_LBUTTONDOWN && mg.x > BUTTONX && mg.y > 550 && mg.x < BUTTONX + BUTTONW && mg.y < 550 + BUTTONH) {
-            Page = true;
-            return;
+    while (true) {
+        Sleep(200);
+        while (peekmessage(&msg, EM_MOUSE))
+        {
+            //判断是否点击
+            if (msg.message == WM_LBUTTONDOWN && inArea(msg.x, msg.y, BUTTONX, 100, BUTTONW, BUTTONH))
+            {
+                TimeView();
+            }
+            if (msg.message == WM_LBUTTONDOWN && inArea(msg.x, msg.y, BUTTONX, 250, BUTTONW, BUTTONH))
+            {
+                game();
+            }
+            if (msg.message == WM_LBUTTONDOWN && inArea(msg.x, msg.y, BUTTONX, 400, BUTTONW, BUTTONH))
+            {
+                StudentSettingView();
+            }
+            if (msg.message == WM_LBUTTONDOWN && inArea(msg.x, msg.y, BUTTONX, 550, BUTTONW, BUTTONH))
+            {
+                Page = 0;
+                StudentmenuView();
+            }
         }
     }
 }
@@ -461,3 +480,4 @@ void TimeView() {
     StudentshowButton(550, 100, 200, 100, "自习中", 48, {92,235,89}, {255,255,255});
     timer();
 }
+
