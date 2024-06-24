@@ -31,6 +31,7 @@
 #include <cmath>
 #include <random>
 #include <windows.h>
+#include "StudentView.h"
 using namespace std;
 #pragma comment(lib,"winmm.lib")
 
@@ -458,6 +459,9 @@ namespace gameqoqo {
 	*/
 	void musicChangeView();
 
+
+	void ReturnStudent();
+
 	//---------------------view---------------------
 
 
@@ -505,6 +509,12 @@ namespace gameqoqo {
 	}
 
 	//--------------------------service--------------------------
+
+
+	void ReturnStudent() {
+		return StudentmenuView();
+	}
+
 
 	void Gameinit() {
 		srand(int(time(0)));
@@ -911,7 +921,7 @@ namespace gameqoqo {
 				}
 				if (msg.message == WM_LBUTTONDOWN && inArea(msg.x, msg.y, BUTTONX, 550, BUTTONW, BUTTONH))
 				{
-					exit(0);
+					ReturnStudent();
 				}
 			}
 		}

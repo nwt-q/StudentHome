@@ -303,14 +303,19 @@ EasyButton btnOK;
 */
 void On_btnOk_Click()
 {
-    if (strcmp("123456", txtPwd.text))
-        MessageBox(GetHWnd(), "密码错误", "错误", MB_OK);
-    else // 如果登入成功
-    {
-        MessageBox(GetHWnd(),txtName.text, "Hello", MB_OK); // 消息弹窗
-        StudentmenuView();
+    User* user = ReturnUser();
+    int Usernum = ReturnUserCount();
+    for (int i = 0; i < Usernum; i++) {
+        if (strcmp(user[i].power.c_str(), txtPwd.text) && strcmp(user[i].name.c_str(), txtPwd.text))
+            MessageBox(GetHWnd(), "密码错误或用户名不存在", "错误", MB_OK);
+        else // 如果登入成功
+        {
+            MessageBox(GetHWnd(), txtName.text, "Hello", MB_OK); // 消息弹窗
+            StudentmenuView();
+        }
     }
 }
+
 //-----------------登入页面设计----------------
 
 /*
@@ -381,7 +386,20 @@ void StudentSendView()
     putimage(0, 0, &img);/*展示图片*/
     setbkmode(TRANSPARENT); // 用于解决黑色背景图
     putimage(0, 0, &img);/*展示图片*/
-    Lin();
+    setbkmode(TRANSPARENT); // 用于解决黑色背景图
+    settextcolor(BLACK);
+    settextstyle(60, 0, _T("华文新魏"));//设置字号、字体
+    outtextxy(400, 200, "注册Todo");
+    settextcolor(BLACK);
+    settextstyle(40, 0, _T("华文新魏"));//设置字号、字体
+    outtextxy(280, 340, "用户名：");
+    txtName = EasyTextBoxCreate(400, 330, 700, 375, 10);        // 创建用户名文本框控件
+    settextstyle(40, 0, _T("华文新魏"));//设置字号、字体
+    outtextxy(280, 400, "密　码：");
+    txtPwd = EasyTextBoxCreate(400, 400, 700, 445, 10);
+    settextstyle(15, 0, "");//设置字号、字体
+    btnOK = EasyButtonCreate(620, 470, 700, 495, "注册", On_btnOk_Click);	// 创建按钮控件
+    settextstyle(30, 0, "");//设置字号、字体
     while (true);
 }
 
@@ -392,7 +410,7 @@ void StudentSendView()
     参数：void
     返回值：void
 */
-void StudentshowButton(int x, int y, int width, int height, std::string str, int textSize,Color fillColor, Color textColor)			//默认黑底，白字
+void StudentshowButton(int x, int y, int width, int height, std::string str, int textSize, Color fillColor, Color textColor)			//默认黑底，白字
 {
     setfillcolor(RGB(fillColor.R, fillColor.G, fillColor.B));
     fillroundrect(x, y, x + width, y + height, width / 10, width / 10);
@@ -402,6 +420,7 @@ void StudentshowButton(int x, int y, int width, int height, std::string str, int
     int h = (height - textheight(str.c_str())) / 2;
     settextcolor(RGB(textColor.R, textColor.G, textColor.B));
     outtextxy(x + w, y + h, str.c_str());
+
 }
 
 /*
@@ -436,6 +455,7 @@ void StudentmenuView() {
             if (msg.message == WM_LBUTTONDOWN && inArea(msg.x, msg.y, BUTTONX, 250, BUTTONW, BUTTONH))
             {
                 game();
+                StudentmenuView();
             }
             if (msg.message == WM_LBUTTONDOWN && inArea(msg.x, msg.y, BUTTONX, 400, BUTTONW, BUTTONH))
             {
@@ -486,11 +506,33 @@ void StudentSettingView() {
     }
 }
 
-
 void StopView() {
+    using namespace gxb;
     IMAGE img;
     loadimage(&img, "../Photo/19.png", 1280, 720);/*变量地址，图片地址    相对地址“./”本目录下的文件进行访问   图片展示可以是png也可以是jpg*/
     putimage(0, 0, &img);/*展示图片*/
+
+    StudentshowButton(350, 500, 200, 100, "返回菜单", 48, { 92,235,89 }, { 255,255,255 });
+    StudentshowButton(750, 500, 200, 100, "游戏空间", 48, { 92,235,89 }, { 255,255,255 });
+    settextstyle(40, 0, _T("华文新魏"));//设置字号、字体
+    FlushBatchDraw();   // 更新屏幕显示
+    TimePrint();
+    outtextxy(550, 150, "你已经自习了") ;
+    while (true) {
+        Sleep(200);
+        while (peekmessage(&msg, EM_MOUSE))
+        {
+            if (msg.message == WM_LBUTTONDOWN && inArea(msg.x, msg.y, 350, 500, 200, 100))
+            {
+                StudentmenuView();
+            }
+            if (msg.message == WM_LBUTTONDOWN && inArea(msg.x, msg.y, 750, 500, 200, 100))
+            {
+                game();
+            }
+        }
+    }
+
 }
 
 void TimeViewFPS(IMAGE &img) {

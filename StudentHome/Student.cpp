@@ -35,19 +35,21 @@ long pauseT; //暂停时时间
 
 
 
+// 当前用户数量
+extern int UserCount = 1;
 
 User student[MAXN];
 
-// 当前用户数量
-extern int UserCount = 0;
-//用于时间统计
-extern int tim = 0;
-
 
 User* ReturnUser() {
+	student[0].name = "root";
+	student[0].power = "123456";
 	return student;
 }
 
+int ReturnUserCount() {
+	return UserCount;
+}
 
 // ---------------service-----------------
 

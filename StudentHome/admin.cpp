@@ -20,6 +20,5 @@
 
 #include "admin.h"
 
-
 // ×¢ÏúÑ§ÉúÕËºÅÕËºÅ
 bool resign(std::string name, std::string power);

@@ -33,8 +33,11 @@ extern struct User {
 	std::string power;
 };
 
+
 // -------------------- service --------------------
 
+User* ReturnUser();
+int ReturnUserCount();
 
 // ×¢ÏúÕËºÅ
 bool resign(std::string name, std::string power);
