@@ -511,8 +511,6 @@ void StudentmenuView() {
 }
 
 
-const int windowsWidth = 1280;
-const int windowsHeight = 720;
 void ProductionGroupView()
 {
     const string kText = "制作组信息"; // 需要滚动显示的文本内容
@@ -520,7 +518,7 @@ void ProductionGroupView()
                             "组员：钟欣" };
     ExMessage m;
 
-    int y = windowsHeight;
+    int y = 720;
     IMAGE img;
     loadimage(&img, "../Photo/19.png", 1280, 720, true);//背景图片
     Color fillColor1 = { 135, 206, 250 };
@@ -538,7 +536,7 @@ void ProductionGroupView()
 
         for (int i = 0; i < 9; i++)
         {
-            int w = (windowsWidth - textwidth(kTextArr[i].c_str())) / 2;
+            int w = (1280 - textwidth(kTextArr[i].c_str())) / 2;
             outtextxy(w, i * 100 + y, kTextArr[i].c_str()); // 在指定位置输出文本
         }
 
@@ -546,7 +544,7 @@ void ProductionGroupView()
         y -= 2; // 每次向上移动 1 个像素
 
         if (y < -700) { // 如果文本移动出屏幕，则重新开始滚动
-            y = windowsHeight;
+            y = 720;
         }
 
         // 等待一定时间，以控制滚动速度
