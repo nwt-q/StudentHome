@@ -42,8 +42,12 @@ void StudentSendView();
 //放置按钮
 void StudentshowButton(int x, int y, int width, int height, std::string str, int textSize, Color fillColor, Color textColor);
 
+void GameSelect();
 //学生页面
 void StudentmenuView();
+
+// 技术人员展示页面
+void ProductionGroupView();
 
 // 设置界面
 void StudentSettingView();

@@ -40,7 +40,7 @@ namespace gameqoqo {
 	static double mapDeltaY = 0;
 
 	const string voiceSRC = "../Music/backgroundMusic.mp3";				//背景音乐的文件路径
-	const string BackGround = "../background/2.jpg";			//开始界面(菜单)背景的文件路径
+	const string BackGround = "../background/3.jpg";			//开始界面(菜单)背景的文件路径
 	const int skinCount = 6;								//皮肤数量
 	string gamerSkins[skinCount] =
 	{ "../Skins/皮肤一.png","../Skins/皮肤二.png","../Skins/皮肤三.png",

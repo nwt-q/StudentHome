@@ -1,63 +1,6 @@
-﻿  Student.cpp
+﻿  StudentView.cpp
 D:\creatdome\onedome\demo\StudentHome\StudentHome\Student.h(34,2): warning C4091: “extern ”: 没有声明变量时忽略“User”的左侧
-  (编译源文件“Student.cpp”)
+  (编译源文件“StudentView.cpp”)
   
-D:\creatdome\onedome\demo\StudentHome\StudentHome\game.h(690,20): warning C4244: “初始化”: 从“double”转换到“int”，可能丢失数据
-  (编译源文件“Student.cpp”)
-  
-D:\creatdome\onedome\demo\StudentHome\StudentHome\game.h(823,13): warning C4114: 多次使用同一类型限定符
-  (编译源文件“Student.cpp”)
-  
-D:\creatdome\onedome\demo\StudentHome\StudentHome\game.h(943,69): warning C4244: “参数”: 从“double”转换到“int”，可能丢失数据
-  (编译源文件“Student.cpp”)
-  
-D:\creatdome\onedome\demo\StudentHome\StudentHome\game.h(943,46): warning C4244: “参数”: 从“double”转换到“int”，可能丢失数据
-  (编译源文件“Student.cpp”)
-  
-D:\creatdome\onedome\demo\StudentHome\StudentHome\game.h(943,25): warning C4244: “参数”: 从“double”转换到“int”，可能丢失数据
-  (编译源文件“Student.cpp”)
-  
-D:\creatdome\onedome\demo\StudentHome\StudentHome\game.h(950,62): warning C4244: “参数”: 从“double”转换到“int”，可能丢失数据
-  (编译源文件“Student.cpp”)
-  
-D:\creatdome\onedome\demo\StudentHome\StudentHome\game.h(950,43): warning C4244: “参数”: 从“double”转换到“int”，可能丢失数据
-  (编译源文件“Student.cpp”)
-  
-D:\creatdome\onedome\demo\StudentHome\StudentHome\game.h(950,24): warning C4244: “参数”: 从“double”转换到“int”，可能丢失数据
-  (编译源文件“Student.cpp”)
-  
-D:\creatdome\onedome\demo\StudentHome\StudentHome\game.h(953,73): warning C4244: “参数”: 从“double”转换到“int”，可能丢失数据
-  (编译源文件“Student.cpp”)
-  
-D:\creatdome\onedome\demo\StudentHome\StudentHome\game.h(953,50): warning C4244: “参数”: 从“double”转换到“int”，可能丢失数据
-  (编译源文件“Student.cpp”)
-  
-D:\creatdome\onedome\demo\StudentHome\StudentHome\game.h(954,82): warning C4244: “参数”: 从“double”转换到“int”，可能丢失数据
-  (编译源文件“Student.cpp”)
-  
-D:\creatdome\onedome\demo\StudentHome\StudentHome\game.h(954,39): warning C4244: “参数”: 从“double”转换到“int”，可能丢失数据
-  (编译源文件“Student.cpp”)
-  
-D:\creatdome\onedome\demo\StudentHome\StudentHome\game.h(962,63): warning C4244: “参数”: 从“double”转换到“int”，可能丢失数据
-  (编译源文件“Student.cpp”)
-  
-D:\creatdome\onedome\demo\StudentHome\StudentHome\game.h(962,44): warning C4244: “参数”: 从“double”转换到“int”，可能丢失数据
-  (编译源文件“Student.cpp”)
-  
-D:\creatdome\onedome\demo\StudentHome\StudentHome\game.h(962,25): warning C4244: “参数”: 从“double”转换到“int”，可能丢失数据
-  (编译源文件“Student.cpp”)
-  
-D:\creatdome\onedome\demo\StudentHome\StudentHome\game.h(1038,25): warning C4244: “参数”: 从“double”转换到“int”，可能丢失数据
-  (编译源文件“Student.cpp”)
-  
-D:\creatdome\onedome\demo\StudentHome\StudentHome\game.h(1038,14): warning C4244: “参数”: 从“double”转换到“int”，可能丢失数据
-  (编译源文件“Student.cpp”)
-  
-D:\creatdome\onedome\demo\StudentHome\StudentHome\Student.cpp(90,19): warning C4244: “=”: 从“time_t”转换到“long”，可能丢失数据
-D:\creatdome\onedome\demo\StudentHome\StudentHome\Student.cpp(109,20): warning C4244: “=”: 从“time_t”转换到“long”，可能丢失数据
-D:\creatdome\onedome\demo\StudentHome\StudentHome\Student.cpp(114,25): warning C4244: “+=”: 从“time_t”转换到“long”，可能丢失数据
-D:\creatdome\onedome\demo\StudentHome\StudentHome\Student.cpp(125,20): warning C4244: “=”: 从“time_t”转换到“long”，可能丢失数据
-D:\creatdome\onedome\demo\StudentHome\StudentHome\Student.cpp(127,20): warning C4244: “=”: 从“time_t”转换到“long”，可能丢失数据
-D:\creatdome\onedome\demo\StudentHome\StudentHome\Student.cpp(140,20): warning C4244: “=”: 从“time_t”转换到“long”，可能丢失数据
-D:\creatdome\onedome\demo\StudentHome\StudentHome\Student.cpp(165,9): warning C4244: “初始化”: 从“time_t”转换到“long”，可能丢失数据
+D:\creatdome\onedome\demo\StudentHome\StudentHome\StudentView.cpp(96,46): warning C4838: 从“int”转换到“unsigned __int64”需要收缩转换
   StudentHome.vcxproj -> D:\creatdome\onedome\demo\StudentHome\x64\Debug\StudentHome.exe

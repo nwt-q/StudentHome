@@ -330,7 +330,7 @@ void LoginView() {
     //setbkcolor(0xeeeeee);
     cleardevice();  // 顺便可以消除鼠标
     IMAGE img;/*声明一个IMAGE变量*/
-    loadimage(&img, "../Photo/18.png", 1280, 720);/*变量地址，图片地址    相对地址“./”本目录下的文件进行访问   图片展示可以是png也可以是jpg*/
+    loadimage(&img, "../Photo/23.jpg", 1280, 720);/*变量地址，图片地址    相对地址“./”本目录下的文件进行访问   图片展示可以是png也可以是jpg*/
     putimage(0, 0, &img);/*展示图片*/
     setbkmode(TRANSPARENT); // 用于解决黑色背景图
     settextcolor(BLACK);
@@ -423,6 +423,47 @@ void StudentshowButton(int x, int y, int width, int height, std::string str, int
 
 }
 
+
+//游戏选择
+void GameSelect() {
+    using namespace gxb;
+    cleardevice();
+    IMAGE img;
+    loadimage(&img, "../Photo/20.jpg", 1280, 720);/*变量地址，图片地址    相对地址“./”本目录下的文件进行访问   图片展示可以是png也可以是jpg*/
+    putimage(0, 0, &img);/*展示图片*/
+
+
+    StudentshowButton(BUTTONX, 100, BUTTONW, BUTTONH, "游戏I", 48, fillColor, textColor);
+    StudentshowButton(BUTTONX, 250, BUTTONW, BUTTONH, "游戏II", 48, fillColor, textColor);
+    StudentshowButton(BUTTONX, 400, BUTTONW, BUTTONH, "游戏III", 48, fillColor, textColor);
+    StudentshowButton(BUTTONX, 550, BUTTONW, BUTTONH, "游戏IV", 48, fillColor, textColor);
+
+    /*用于页面跳转*/
+    while (true) {
+        Sleep(200);
+        while (peekmessage(&msg, EM_MOUSE))
+        {
+            //判断是否点击
+            if (msg.message == WM_LBUTTONDOWN && inArea(msg.x, msg.y, BUTTONX, 100, BUTTONW, BUTTONH))
+            {
+                game();
+            }
+            if (msg.message == WM_LBUTTONDOWN && inArea(msg.x, msg.y, BUTTONX, 250, BUTTONW, BUTTONH))
+            {
+                game();
+            }
+            if (msg.message == WM_LBUTTONDOWN && inArea(msg.x, msg.y, BUTTONX, 400, BUTTONW, BUTTONH))
+            {
+                game();
+            }
+            if (msg.message == WM_LBUTTONDOWN && inArea(msg.x, msg.y, BUTTONX, 550, BUTTONW, BUTTONH))
+            {
+                game();
+            }
+        }
+    }
+}
+
 /*
     负责人：
     功能：学生页面用于页面切换
@@ -454,7 +495,7 @@ void StudentmenuView() {
             }
             if (msg.message == WM_LBUTTONDOWN && inArea(msg.x, msg.y, BUTTONX, 250, BUTTONW, BUTTONH))
             {
-                game();
+                GameSelect();
                 StudentmenuView();
             }
             if (msg.message == WM_LBUTTONDOWN && inArea(msg.x, msg.y, BUTTONX, 400, BUTTONW, BUTTONH))
@@ -469,12 +510,67 @@ void StudentmenuView() {
     }
 }
 
+
+const int windowsWidth = 1280;
+const int windowsHeight = 720;
+void ProductionGroupView()
+{
+    const string kText = "制作组信息"; // 需要滚动显示的文本内容
+    const string kTextArr[9] = { "组名：第12组","组长：吴德全","组员：肖舜昌","组员：于在熙",
+                            "组员：钟欣" };
+    ExMessage m;
+
+    int y = windowsHeight;
+    IMAGE img;
+    loadimage(&img, "../Photo/19.png", 1280, 720, true);//背景图片
+    Color fillColor1 = { 135, 206, 250 };
+    Color textColor1 = { 0,0,0 };
+    Color textColor2 = { 238,238,9 };
+    while (true) { // 循环播放滚动文本
+        Sleep(5);
+        BeginBatchDraw();
+        cleardevice(); // 清空屏幕
+        putimage(0, 0, &img);
+        StudentshowButton(1080, 670, 200, 50, "点击屏幕返回", 30, fillColor1, textColor1);
+        settextstyle(48, 0, "华文行楷"); // 设置字体样式和大小
+        settextcolor(RGB(textColor2.R, textColor2.G, textColor2.B)); // 设置文本颜色
+        setbkmode(TRANSPARENT);
+
+        for (int i = 0; i < 9; i++)
+        {
+            int w = (windowsWidth - textwidth(kTextArr[i].c_str())) / 2;
+            outtextxy(w, i * 100 + y, kTextArr[i].c_str()); // 在指定位置输出文本
+        }
+
+        // 显示滚动文本
+        y -= 2; // 每次向上移动 1 个像素
+
+        if (y < -700) { // 如果文本移动出屏幕，则重新开始滚动
+            y = windowsHeight;
+        }
+
+        // 等待一定时间，以控制滚动速度
+        FlushBatchDraw();
+        if (peekmessage(&m, EM_MOUSE)) {
+            if (m.message == WM_LBUTTONDOWN) {
+                cleardevice();
+                EndBatchDraw();
+                break;
+            }
+        }
+    }
+    EndBatchDraw();
+    StudentSettingView();
+}
+
+
+
 //学生设置页面
 void StudentSettingView() {
     using namespace gxb;
     cleardevice();
     IMAGE img;
-    loadimage(&img, "../Photo/18.png", 1280, 720);/*变量地址，图片地址    相对地址“./”本目录下的文件进行访问   图片展示可以是png也可以是jpg*/
+    loadimage(&img, "../Photo/19.png", 1280, 720);/*变量地址，图片地址    相对地址“./”本目录下的文件进行访问   图片展示可以是png也可以是jpg*/
     putimage(0, 0, &img);/*展示图片*/
 
     StudentshowButton(BUTTONX, 100, BUTTONW, BUTTONH, "技术人员", 48, fillColor, textColor);
@@ -488,7 +584,7 @@ void StudentSettingView() {
             //判断是否点击
             if (msg.message == WM_LBUTTONDOWN && inArea(msg.x, msg.y, BUTTONX, 100, BUTTONW, BUTTONH))
             {
-                
+                ProductionGroupView();
             }
             if (msg.message == WM_LBUTTONDOWN && inArea(msg.x, msg.y, BUTTONX, 250, BUTTONW, BUTTONH))
             {
@@ -496,7 +592,7 @@ void StudentSettingView() {
             }
             if (msg.message == WM_LBUTTONDOWN && inArea(msg.x, msg.y, BUTTONX, 400, BUTTONW, BUTTONH))
             {
-                StudentSettingView();
+                CloseMusic();
             }
             if (msg.message == WM_LBUTTONDOWN && inArea(msg.x, msg.y, BUTTONX, 550, BUTTONW, BUTTONH))
             {

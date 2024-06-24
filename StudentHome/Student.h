@@ -89,6 +89,7 @@ void WorkSendTo();
 */
 void OpenMusic();
 
+void CloseMusic();
 
 void T();
 // -------------------- view --------------------

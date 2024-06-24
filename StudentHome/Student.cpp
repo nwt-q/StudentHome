@@ -201,6 +201,16 @@ void OpenMusic() {
 	mciSendString(_T("play ../Music/backgroundMusic.mp3 repeat"), NULL, 0, NULL);//循环播放
 }
 
+/*
+	负责人：
+	功能：关闭音乐
+	参数：无
+	返回值：void
+*/
+void CloseMusic() {
+	mciSendString(_T("close  ../Music/backgroundMusic.mp3"), NULL, 0, NULL);//关闭音乐
+}
+
 
 void T() {
 	printf("////////////////////////////////////////////////////////////////////\n");
