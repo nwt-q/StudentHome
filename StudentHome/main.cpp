@@ -31,12 +31,11 @@
 int main() {
 	initgraph(1280, 720, SHOWCONSOLE);
 	T();
-	//StudentSendView();
-	LoginView();
-	//StudentmenuView();
+	StudentFilenout("../Data/StudentData.txt");
+	//LoginView();
+	StudentInfoDisplay();
+	StudentFilein("../Data/test.txt");
 	// 关闭图形模式
 	closegraph();
-	//LoginView();
-	/*StudentmenuView();*/
     return 0;
 }

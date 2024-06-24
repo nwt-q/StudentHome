@@ -20,7 +20,6 @@
 #include "StudentView.h"
 #include "Star.h"
 
-std::string inputUser = "";  // 存储输入文本的变量
 
 // 用于读取特定区域的鼠标信息(绿色)
 namespace gxb
@@ -46,18 +45,13 @@ namespace gxb
     }
 }
 
+// 定义控件
+EasyTextBox txtName;
+EasyTextBox txtPwd;
+EasyButton btnOK;
+
 //-----------------登入页面设计----------------
 
-/*
-    负责人：
-    功能：设计文本框控件
-*/
-struct EasyTextBox 
-{
-    int left = 0, top = 0, right = 0, bottom = 0; // 控件坐标
-    char* text = NULL;                         // 控件内容
-    unsigned __int64 maxlen = 0;                 // 文本框最大内容长度
-};
 
 /*
     负责人：
@@ -123,96 +117,8 @@ void EasyTextBoxDelete(EasyTextBox* NEW) {
     }
 }
 
-/*
-    负责人：
-    功能：鼠标点击事件 & 光标定位
-    参数：EasyTextBox* NEW
-    返回值：bool
-*/
-void EasyTextBoxOnMessage(EasyTextBox* NEW)
-{
-    // 备份环境值
-    int oldlinecolor = getlinecolor();
-    int oldbkcolor = getbkcolor();
-    int oldfillcolor = getfillcolor();
-
-    setlinecolor(BLACK);			// 设置画线颜色
-    setbkcolor(WHITE);				// 设置背景颜色
-    setfillcolor(WHITE);			// 设置填充颜色
-    fillrectangle(NEW->left, NEW->top, NEW->right, NEW->bottom);
-    outtextxy(NEW->left + 20, NEW->top + 15, NEW->text);
-
-    int width = textwidth(NEW->text);	// 字符串总宽度
-    int counter = 0;				// 光标闪烁计数器
-    bool binput = true;				// 是否输入中
-
-    ExMessage msg; // 检查鼠标点击事件
-    while (binput)
-    {
-        while (binput && peekmessage(&msg, EX_MOUSE | EX_CHAR, false))	// 获取消息，但不从消息队列拿出
-        {
-            if (msg.message == WM_LBUTTONDOWN)
-            {
-                // 如果鼠标点击文本框外面，结束文本输入
-                if (msg.x < NEW->left || msg.x > NEW->right || msg.y < NEW->top || msg.y > NEW->bottom)
-                {
-                    binput = false;
-                    break;
-                }
-            }
-            else if (msg.message == WM_CHAR)
-            {
-                size_t len = strlen(NEW->text);
-                switch (msg.ch)
-                {
-                case '\b':				// 用户按退格键，删掉一个字符
-                    if (len > 0)
-                    {
-                        NEW->text[len - 1] = 0;
-                        width = textwidth(NEW->text);
-                        counter = 0;
-                        clearrectangle(NEW->left + 10 + width, NEW->top + 1, NEW->right - 1, NEW->bottom - 1);
-                    }
-                    break;
-                case '\r':				// 用户按回车键，结束文本输入
-                case '\n':
-                    binput = false;
-                    break;
-                default:				// 用户按其它键，接受文本输入
-                    if (len < NEW->maxlen - 1)
-                    {
-                        NEW->text[len++] = msg.ch;
-                        NEW->text[len] = 0;
-
-                        clearrectangle(NEW->left + 10 + width + 1, NEW->top + 3, NEW->left + 10 + width + 1, NEW->bottom - 3);	// 清除画的光标
-                        width = textwidth(NEW->text);				// 重新计算文本框宽度
-                        counter = 0;
-                        outtextxy(NEW->left + 10, NEW->top + 5, NEW->text);		// 输出新的字符串
-                    }
-                }
-            }
-            peekmessage(NULL, EX_MOUSE | EX_CHAR);				// 从消息队列抛弃刚刚处理过的一个消息
-        }
-
-        // 绘制光标（光标闪烁周期为 20ms * 32）
-        counter = (counter + 1) % 32;
-        if (counter < 16)
-            line(NEW->left + 10 + width + 1, NEW->top + 3, NEW->left + 10 + width + 1, NEW->bottom - 3);				// 画光标
-        else
-            clearrectangle(NEW->left + 10 + width + 1, NEW->top + 3, NEW->left + 10 + width + 1, NEW->bottom - 3);		// 擦光标
-
-        // 延时 20ms
-        Sleep(20);
-    }
-}
 
 //----------------实现按键控件EasyButton-------------
-struct EasyButton {
-    int left = 0, top = 0, right = 0, bottom = 0;	// 控件坐标
-    char* text = NULL;							// 控件内容
-    void (*userfunc)() = NULL;						// 控件消息
-};
-
 /*
     负责人：
     功能：绘制界面
@@ -290,10 +196,6 @@ void EasyButtonOnMessage(EasyButton* NEW)
         NEW->userfunc();
 }
 
-// 定义控件
-EasyTextBox txtName;
-EasyTextBox txtPwd;
-EasyButton btnOK;
 
 /*
     负责人：
@@ -313,6 +215,89 @@ void On_btnOk_Click()
             MessageBox(GetHWnd(), txtName.text, "Hello", MB_OK); // 消息弹窗
             StudentmenuView();
         }
+    }
+}
+
+/*
+    负责人：
+    功能：鼠标点击事件 & 光标定位
+    参数：EasyTextBox* NEW
+    返回值：bool
+*/
+void EasyTextBoxOnMessage(EasyTextBox* NEW)
+{
+    // 备份环境值
+    int oldlinecolor = getlinecolor();
+    int oldbkcolor = getbkcolor();
+    int oldfillcolor = getfillcolor();
+
+    setlinecolor(BLACK);			// 设置画线颜色
+    setbkcolor(WHITE);				// 设置背景颜色
+    setfillcolor(WHITE);			// 设置填充颜色
+    fillrectangle(NEW->left, NEW->top, NEW->right, NEW->bottom);
+    outtextxy(NEW->left + 20, NEW->top + 15, NEW->text);
+
+    int width = textwidth(NEW->text);	// 字符串总宽度
+    int counter = 0;				// 光标闪烁计数器
+    bool binput = true;				// 是否输入中
+
+    ExMessage msg; // 检查鼠标点击事件
+    while (binput)
+    {
+        while (binput && peekmessage(&msg, EX_MOUSE | EX_CHAR, false))	// 获取消息，但不从消息队列拿出
+        {
+            if (msg.message == WM_LBUTTONDOWN)
+            {
+                // 如果鼠标点击文本框外面，结束文本输入
+                if (msg.x < NEW->left || msg.x > NEW->right || msg.y < NEW->top || msg.y > NEW->bottom)
+                {
+                    binput = false;
+                    break;
+                }
+            }
+            else if (msg.message == WM_CHAR)
+            {
+                size_t len = strlen(NEW->text);
+                switch (msg.ch)
+                {
+                case '\b':				// 用户按退格键，删掉一个字符
+                    if (len > 0)
+                    {
+                        NEW->text[len - 1] = 0;
+                        width = textwidth(NEW->text);
+                        counter = 0;
+                        clearrectangle(NEW->left + 10 + width, NEW->top + 1, NEW->right - 1, NEW->bottom - 1);
+                    }
+                    break;
+                case '\r':		On_btnOk_Click();		// 用户按回车键，结束文本输入
+                case '\n':
+                    binput = false;
+                    break;
+                default:				// 用户按其它键，接受文本输入
+                    if (len < NEW->maxlen - 1)
+                    {
+                        NEW->text[len++] = msg.ch;
+                        NEW->text[len] = 0;
+
+                        clearrectangle(NEW->left + 10 + width + 1, NEW->top + 3, NEW->left + 10 + width + 1, NEW->bottom - 3);	// 清除画的光标
+                        width = textwidth(NEW->text);				// 重新计算文本框宽度
+                        counter = 0;
+                        outtextxy(NEW->left + 10, NEW->top + 5, NEW->text);		// 输出新的字符串
+                    }
+                }
+            }
+            peekmessage(NULL, EX_MOUSE | EX_CHAR);				// 从消息队列抛弃刚刚处理过的一个消息
+        }
+
+        // 绘制光标（光标闪烁周期为 20ms * 32）
+        counter = (counter + 1) % 32;
+        if (counter < 16)
+            line(NEW->left + 10 + width + 1, NEW->top + 3, NEW->left + 10 + width + 1, NEW->bottom - 3);				// 画光标
+        else
+            clearrectangle(NEW->left + 10 + width + 1, NEW->top + 3, NEW->left + 10 + width + 1, NEW->bottom - 3);		// 擦光标
+
+        // 延时 20ms
+        Sleep(20);
     }
 }
 
@@ -420,11 +405,16 @@ void StudentshowButton(int x, int y, int width, int height, std::string str, int
     int h = (height - textheight(str.c_str())) / 2;
     settextcolor(RGB(textColor.R, textColor.G, textColor.B));
     outtextxy(x + w, y + h, str.c_str());
-
 }
 
 
-//游戏选择
+
+/*
+    负责人：
+    功能：游戏选择
+    参数：void
+    返回值：void
+*/
 void GameSelect() {
     using namespace gxb;
     cleardevice();

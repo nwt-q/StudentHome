@@ -128,6 +128,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="admin.cpp" />
+    <ClCompile Include="AdminView.cpp" />
     <ClCompile Include="All.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Star.cpp" />

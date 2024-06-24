@@ -37,7 +37,8 @@ long pauseT; //暂停时时间
 
 // 当前用户数量
 extern int UserCount = 1;
-
+std::string Header; // 显示项(显示的头部)
+std::vector<Student> StudentM; //(保存数据)
 User student[MAXN];
 
 
@@ -51,11 +52,122 @@ int ReturnUserCount() {
 	return UserCount;
 }
 
+/*
+	负责人：
+	功能：用于初始化数据信息
+	参数：std::string ID,std::string Name,std::string Class,std::string Grade,Student* NEWStudent
+	返回值：Student*
+*/
+Student* StudentIn(Student* NEWStudent, std::string ID, std::string Name, std::string Class, std::string Grade,std::string Power) {
+	NEWStudent->ID = ID;
+	NEWStudent->Name = Name;
+	NEWStudent->Class = Class;
+	NEWStudent->Grade = Grade;
+	NEWStudent->Power = Power;
+	return  NEWStudent;
+}
+
+
 // ---------------service-----------------
+
+vector<Student> ReturnStudent() {
+	return StudentM;
+}
+
+
+/*
+	负责人：
+	功能：格式化数据用于数据的格式化
+	参数：void
+	返回值：void
+*/
+std::string FormatInfo(Student* Stu) {
+	std::stringstream ss;
+	ss << Stu->ID << "\t" << "\t" << Stu->Name << "\t" << "\t" << Stu->Class << "\t" << " " << Stu->Grade << "\t" << "\t" << Stu->Power;
+	return ss.str();
+}
+
+
+/*
+	负责人：
+	功能：用于将注册信息写入文件对数据进行持久化储存
+	参数：const std::string& FileName : 文件名
+	返回值：void
+*/
+void StudentFilein(const std::string& FileName)
+{
+	fstream write(FileName, ios::out | ios::trunc);  // FileName : 打开参数   ios::out | ios::trunc : 打开模式
+
+	if (!write.is_open())
+	{
+		cerr << "Unable to open file." << std::endl; // 未打开成功
+		return;
+	}
+	// 写入头部数据
+	Header += "\n";
+	write.write(Header.c_str(), Header.size());
+	// 写入数据
+	for (int i = 0; i < StudentM.size(); i++) 
+	{
+		cout << FormatInfo(&StudentM[i]) << endl;
+		write.write(FormatInfo(&StudentM[i]).c_str(), FormatInfo(&StudentM[i]).size()); // 写入数据
+	}
+	write.close();
+}
+
+
+/*
+	负责人：
+	功能：读入文件信息
+	参数：const std::string& FileName : 文件名
+	返回值：void
+*/
+void StudentFilenout(const std::string& FileName)
+{
+	// 注意引入头文件 : #include <fstream>
+	fstream read(FileName, ios::in);
+	if (!read.is_open()) {
+		std::cerr << "Unable to open file." << std::endl; // 未打开成功
+		return;
+	}
+	char Buf[1024] = { 0 };
+	read.getline(Buf, 1024);
+	Header= std::string(Buf);
+	cout << Header << endl;
+	
+	//读取数据
+	while (!read.eof()) 
+	{
+		char data[1024] = { 0 };
+		read.getline(data, 1024);// 读取一行数据
+
+		Student Limit;
+		stringstream ss(data); // 对数据进行解析
+
+		//从文件中解析数据
+		ss >> Limit.ID;
+		ss >> Limit.Name;
+		ss >> Limit.Class;
+		ss >> Limit.Grade;
+		ss >> Limit.Power;
+
+		student[UserCount].name = (std::string)Limit.Name;
+		student[UserCount].power = (std::string)Limit.Power;
+
+		UserCount++;
+
+		//用于储存学生信息
+		StudentM.push_back(Limit);
+
+		std::cout <<  Limit.ID << " " << Limit.Name << " " << Limit.Class << " " << Limit.Grade << " " << Limit.Power; // 测试
+	}
+
+	read.close();
+}
 
 
 //实现用户登入操作
-bool Login(std::string name,std::string power) {
+bool Login(std::string name, std::string power) {
 	for (int i = 0; i < UserCount; i++) {
 		if (student[i].name == name && student[i].power == power) {
 			return true;
@@ -65,16 +177,17 @@ bool Login(std::string name,std::string power) {
 }
 
 
-bool resign(std::string name, std::string power) {
+bool resign(std::string ID, std::string Name, std::string Class, std::string Grade, std::string Power) {
 	// 如果查找到用户将用户信息置空
 	for (int i = 0; i < UserCount; i++) { // 暂时存在BUG无法解决连续性问题
-		if (student[i].name == name && student[i].power == power) {
+		if (student[i].name == Name && student[i].power == Power) {
 			student[i].name = "";
 			student[i].power = "";
 			UserCount--;
 			return true;
 		}
 	}
+
 	//未查找到用户, 返回失败
 	return false;
 }
@@ -260,7 +373,8 @@ void T() {
 
 
 //用于作业接收,需要查询作业发送的地方,看看存不存在作业,如果存在则将作业显示于用户,如果没有则不显示
-void WorkSendown() {
+void WorkSendown() 
+{
 	
 }
 
@@ -270,7 +384,8 @@ void WorkSendTo() {
 }
 
 //用户注册模块
-bool Sign(std::string name, std::string power) {
+bool Sign(std::string name, std::string power) 
+{
 	student[UserCount].name = name;
 	student[UserCount].power = power;
 	UserCount++;

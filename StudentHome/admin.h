@@ -21,7 +21,7 @@
 
 #ifndef _ADMIN_
 #define _ADMIN_
-#include<iostream>
+#include"All.h"
 
 // -------------------- 数据设计 --------------------
 

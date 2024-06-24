@@ -31,6 +31,8 @@
 #include <cmath>
 #include <random>
 #include <windows.h>
+#include <fstream>
+#include <sstream>
 using namespace std;
 //------------------数据设计------------------
 
