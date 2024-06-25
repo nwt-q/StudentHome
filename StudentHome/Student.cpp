@@ -109,7 +109,7 @@ void StudentFilein(const std::string& FileName)
 	// 写入数据
 	for (int i = 0; i < StudentM.size(); i++) 
 	{
-		cout << FormatInfo(&StudentM[i]) << endl;
+		/*cout << FormatInfo(&StudentM[i]) << endl;*/  // 测试
 		write.write(FormatInfo(&StudentM[i]).c_str(), FormatInfo(&StudentM[i]).size()); // 写入数据
 	}
 	write.close();
@@ -219,7 +219,6 @@ bool isStop()
 void Start()
 {
 	if (is_stop) {
-		start_time = time(0); // 如果终止计时则将初始时间清零
 		is_stop = false;
 	}
 	else if (is_pause) { // 如果是暂停
@@ -250,7 +249,6 @@ void Stop()
 	}
 	else if (!is_stop) {
 		is_stop = true;
-		start_time = time(0);   // 如果终止计时则将初始时间清零
 	}
 }
 
@@ -285,6 +283,7 @@ void TimePrint() {	// 专门设置时间
 	sprintf_s(s, sizeof(s),"%02d:%02d:%02d", t / 60 / 60, t / 60 % 60, t % 60); // 格式化输出
 	FlushBatchDraw();   // 更新屏幕显示
 	outtextxy(572, 332, _T(s));
+	if(is_stop) start_time = time(0);   // 如果终止计时则将初始时间清零
 	return ;
 }
 

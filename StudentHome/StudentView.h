@@ -46,6 +46,8 @@ extern struct EasyButton {
 };
 
 
+
+
 // -------------------- service --------------------
 
 
@@ -103,7 +105,7 @@ EasyButton EasyButtonCreate(int x1, int y1, int x2, int y2, const char* title, v
     负责人：
     功能：删除元素数据
     参数：EasyTextBox* NEW
-    返回值：bool
+    返回值：void
 */
 void EasyButtonDelete(EasyButton* NEW);
 
@@ -119,7 +121,7 @@ bool EasyButtonCheck(EasyButton* NEW, int x, int y);
     负责人：
     功能：调用返回函数
     参数：EasyTextBox* NEW
-    返回值：bool
+    返回值：void
 */
 void EasyButtonOnMessage(EasyButton* NEW);
 
@@ -127,7 +129,7 @@ void EasyButtonOnMessage(EasyButton* NEW);
     负责人：
     功能：确定是否登入成功,按钮 btnOK 的点击事件
     参数：EasyTextBox* NEW
-    返回值：bool
+    返回值：void
 */
 void On_btnOk_Click();
 
@@ -140,7 +142,12 @@ void StudentSendView();
 //-----------------学生登入页面----------------------
 
 
-//放置按钮
+/*
+    负责人：
+    功能：放置按钮
+    参数：int x, int y, int width, int height, std::string str, int textSize, Color fillColor, Color textColor
+    返回值：void
+*/
 void StudentshowButton(int x, int y, int width, int height, std::string str, int textSize, Color fillColor, Color textColor);
 
 // 游戏选择页面

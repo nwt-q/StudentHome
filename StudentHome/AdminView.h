@@ -38,6 +38,14 @@
 */
 void StudentInfoDisplay();
 
+/*
+    负责人：
+    功能：学生信息显示页面二
+    参数：void
+    返回值：void
+*/
+void StudentInfoDisplay1();
+
 // -------------------- view --------------------
 
 #endif // !_STUDENT_

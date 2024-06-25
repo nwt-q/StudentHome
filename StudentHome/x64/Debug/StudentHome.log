@@ -5,4 +5,10 @@ D:\creatdome\onedome\demo\StudentHome\StudentHome\Student.h(34,2): warning C4091
 D:\creatdome\onedome\demo\StudentHome\StudentHome\Student.h(46,2): warning C4091: “extern ”: 没有声明变量时忽略“Student”的左侧
   (编译源文件“AdminView.cpp”)
   
+D:\creatdome\onedome\demo\StudentHome\StudentHome\StudentView.h(36,2): warning C4091: “extern ”: 没有声明变量时忽略“EasyTextBox”的左侧
+  (编译源文件“AdminView.cpp”)
+  
+D:\creatdome\onedome\demo\StudentHome\StudentHome\StudentView.h(46,2): warning C4091: “extern ”: 没有声明变量时忽略“EasyButton”的左侧
+  (编译源文件“AdminView.cpp”)
+  
   StudentHome.vcxproj -> D:\creatdome\onedome\demo\StudentHome\x64\Debug\StudentHome.exe

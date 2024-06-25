@@ -32,7 +32,7 @@ int main() {
 	initgraph(1280, 720, SHOWCONSOLE);
 	T();
 	StudentFilenout("../Data/StudentData.txt");
-	//LoginView();
+	/*LoginView();*/
 	StudentInfoDisplay();
 	StudentFilein("../Data/test.txt");
 	// 关闭图形模式

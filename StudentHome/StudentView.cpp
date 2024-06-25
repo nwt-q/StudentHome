@@ -20,7 +20,6 @@
 #include "StudentView.h"
 #include "Star.h"
 
-
 // 用于读取特定区域的鼠标信息(绿色)
 namespace gxb
 {
@@ -318,9 +317,10 @@ void LoginView() {
     loadimage(&img, "../Photo/23.jpg", 1280, 720);/*变量地址，图片地址    相对地址“./”本目录下的文件进行访问   图片展示可以是png也可以是jpg*/
     putimage(0, 0, &img);/*展示图片*/
     setbkmode(TRANSPARENT); // 用于解决黑色背景图
-    settextcolor(BLACK);
+    settextcolor(WHITE);
     settextstyle(60, 0, _T("华文新魏"));//设置字号、字体
     outtextxy(400, 200, "学生Todo");
+    settextcolor(BLACK);
     settextcolor(BLACK);
     settextstyle(40, 0, _T("华文新魏"));//设置字号、字体
     outtextxy(280, 340, "用户名：");
@@ -387,6 +387,7 @@ void StudentSendView()
     settextstyle(30, 0, "");//设置字号、字体
     while (true);
 }
+
 
 //------------------------------------------------
 /*
@@ -644,6 +645,7 @@ void TimeView() {
     putimage(0, 0, &img);/*展示图片*/
     Timeinit();
     TimePrint();
+    Start(); // 进入便开始自习
     setbkmode(TRANSPARENT);
     settextstyle(48, 0, _T("华文行楷"));
     settextcolor(RGB(255, 255, 255));

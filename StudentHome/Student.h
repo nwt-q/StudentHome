@@ -67,12 +67,12 @@ Student* StudentIn(Student* NEWStudent, std::string ID, std::string Name, std::s
 	参数：void
 	返回值：void
 */
-std::string FormatInfo();
+std::string FormatInfo(Student* Stu);
 
 /*
 	负责人：
 	功能：用于将注册信息写入文件对数据进行持久化储存
-	参数：无
+	参数：const std::string& FileName
 	返回值：void
 */
 void StudentFilein(const std::string& FileName);
