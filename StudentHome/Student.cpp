@@ -21,6 +21,7 @@
 #include "game.h"
 #include <sstream>
 #include <iomanip>
+#include "admin.h"
 #define _CRT_SECURE_NO_WARNINGS 1
 //---------------数据设计----------------------
 
@@ -179,6 +180,7 @@ bool Login(std::string name, std::string power) {
 	}
 	return false;
 }
+
 
 
 bool resign(std::string ID, std::string Name, std::string Class, std::string Grade, std::string Power) {

@@ -63,7 +63,7 @@ bool Login(std::string name, std::string power);
     参数：void
     返回值：void
 */
-void corrective(std::string name, std::string StudentID, std::string StudentClass);
+void corrective(std::string StudentID);
 
 /*
     负责人：

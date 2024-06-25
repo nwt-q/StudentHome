@@ -11,5 +11,5 @@ D:\creatdome\onedome\demo\StudentHome\StudentHome\StudentView.h(36,2): warning C
 D:\creatdome\onedome\demo\StudentHome\StudentHome\StudentView.h(46,2): warning C4091: “extern ”: 没有声明变量时忽略“EasyButton”的左侧
   (编译源文件“AdminView.cpp”)
   
-D:\creatdome\onedome\demo\StudentHome\StudentHome\AdminView.cpp(162,46): warning C4838: 从“int”转换到“unsigned __int64”需要收缩转换
+D:\creatdome\onedome\demo\StudentHome\StudentHome\AdminView.cpp(164,46): warning C4838: 从“int”转换到“unsigned __int64”需要收缩转换
   StudentHome.vcxproj -> D:\creatdome\onedome\demo\StudentHome\x64\Debug\StudentHome.exe

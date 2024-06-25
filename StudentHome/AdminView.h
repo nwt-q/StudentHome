@@ -62,6 +62,14 @@ void AdminPage();
 */
 void AdminView();
 
+/*
+    负责人：
+    功能：管理员页面
+    参数：void
+    返回值：void
+*/
+void CorrectiveView();
+
 // -------------------- view --------------------
 
 #endif // !_STUDENT_

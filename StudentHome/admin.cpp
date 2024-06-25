@@ -19,6 +19,37 @@
 
 
 #include "admin.h"
+#include "StudentView.h"
+/*
+    负责人：
+    功能： 修改学生信息
+    参数：void
+    返回值：void
+*/
+bool resign(std::string name, std::string power)
+{
+    return 0;
+}
 
-// 注销学生账号账号
-bool resign(std::string name, std::string power);
+bool cmp(const Student x, const Student y) {
+    if (x.ID > y.ID) {
+        return true;
+    }
+    return false;
+}
+
+/*
+    负责人：
+    功能： 修改学生信息
+    参数：ReturnStudent() 用于获取学生信息 std::string name,  std::string StudentClass
+    返回值：void
+*/
+void corrective(std::string StudentID) {
+    for (int i = 0; i < ReturnStudent().size(); i++) {
+        if (ReturnStudent()[i].ID == StudentID) {
+            std::swap(ReturnStudent()[i], ReturnStudent().back()); // 将第8个元素和最后一个元素交换  
+            ReturnStudent().pop_back(); // 删除最后一个元素（现在是原来的第8个元素
+            sort(ReturnStudent().begin(), ReturnStudent().end(),cmp);  // 自定义排序规则
+        }
+    }
+}

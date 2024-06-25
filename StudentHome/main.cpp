@@ -35,7 +35,8 @@ int main() {
 	//mciSendString(_T("play ../Music/backgroundMusic.mp3 repeat"), NULL, 0, NULL);//循环播放
 	StudentFilenout("../Data/StudentData.txt");
 	/*LoginView();*/
-	FistPage();
+	/*FistPage();*/
+	CorrectiveView();
 	/*StudentSendView();*/
 	StudentFilein("../Data/test.txt");
 	// 关闭图形模式

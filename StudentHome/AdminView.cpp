@@ -44,7 +44,7 @@ void StudentInfoDisplay()
             }
             if (msg.message == WM_LBUTTONDOWN && msg.x > 25 && msg.y > 15 && msg.x < 25 + 100 && msg.y < 15 + 100)
             {
-                StudentmenuView();
+                AdminView();
             }
         }
     }
@@ -82,7 +82,7 @@ void StudentInfoDisplay1()/*改名*/
             }
             if (msg.message == WM_LBUTTONDOWN && msg.x > 1145 && msg.y > 15 && msg.x < 1145 + 100 && msg.y < 15 + 100)
             {
-                StudentmenuView();
+                AdminView();
             }
         }
     }
@@ -116,7 +116,9 @@ namespace gx
 // 定义学生登入页面控件
 EasyTextBox TxtName;
 EasyTextBox TxtPwd;
+EasyTextBox TxtID;
 EasyButton BtnOK;
+EasyButton BtnOUT;
 
 //定义学生注册页面控件
 
@@ -289,6 +291,11 @@ void AdminOn_btnOk_Click()
             AdminView();
         }
     }
+}
+
+void AdminOn_Delete_Click()
+{
+    corrective(TxtID.text);
 }
 
 /*
@@ -529,8 +536,8 @@ void AdminView()
     loadimage(&img, "../Photo/IV.png", 1280, 720);/*变量地址，图片地址    相对地址“./”本目录下的文件进行访问   图片展示可以是png也可以是jpg*/
     putimage(0, 0, &img);/*展示图片*/
 
-    StudentshowButton(BUTTONX, 100, BUTTONW, BUTTONH, "技术人员", 48, fillColor, textColor);
-    StudentshowButton(BUTTONX, 250, BUTTONW, BUTTONH, "打开音乐", 48, fillColor, textColor);
+    StudentshowButton(BUTTONX, 100, BUTTONW, BUTTONH, "学生信息", 48, fillColor, textColor);
+    StudentshowButton(BUTTONX, 250, BUTTONW, BUTTONH, "信息删除", 48, fillColor, textColor);
     StudentshowButton(BUTTONX, 400, BUTTONW, BUTTONH, "关闭音乐", 48, fillColor, textColor);
     StudentshowButton(BUTTONX, 550, BUTTONW, BUTTONH, "退出登入", 48, fillColor, textColor);
     while (true) {
@@ -540,11 +547,11 @@ void AdminView()
             //判断是否点击
             if (msg.message == WM_LBUTTONDOWN && inArea(msg.x, msg.y, BUTTONX, 100, BUTTONW, BUTTONH))
             {
-                ProductionGroupView();
+                StudentInfoDisplay();
             }
             if (msg.message == WM_LBUTTONDOWN && inArea(msg.x, msg.y, BUTTONX, 250, BUTTONW, BUTTONH))
             {
-                OpenMusic();
+                CorrectiveView();
             }
             if (msg.message == WM_LBUTTONDOWN && inArea(msg.x, msg.y, BUTTONX, 400, BUTTONW, BUTTONH))
             {
@@ -556,4 +563,50 @@ void AdminView()
             }
         }
     }
+}
+
+//学生信息删除页面
+void CorrectiveView() {
+    using namespace gx;
+    cleardevice();
+    setbkcolor(0xeeeeee);
+    IMAGE img;
+    loadimage(&img, "../Photo/IV.png", 1280, 720);/*变量地址，图片地址    相对地址“./”本目录下的文件进行访问   图片展示可以是png也可以是jpg*/
+    putimage(0, 0, &img);/*展示图片*/
+    settextstyle(40, 0, _T("华文新魏")); //设置字号、字体
+    settextcolor(RED);
+    outtextxy(260, 335, "学生ID：");
+    setbkmode(TRANSPARENT); // 用于解决黑色背景图
+    settextcolor(BLACK);
+    settextstyle(60, 0, _T("华文新魏"));//设置字号、字体
+    outtextxy(400, 200, "Admin to Delete Student");
+
+
+    TxtID = AdminEasyTextBoxCreate(400, 330, 700, 375, 10);        // 创建用户名文本框控件
+
+    settextcolor(BLACK);
+    settextstyle(15, 0, "");//设置字号、字体
+    BtnOK = AdminEasyButtonCreate(620, 470, 700, 495, "Delete", AdminOn_Delete_Click);	// 创建按钮控件
+    BtnOUT = AdminEasyButtonCreate(420, 470, 500, 495, "OUT", AdminView);	// 创建按钮控件
+    settextstyle(30, 0, "");//设置字号、字体
+
+    ExMessage msg;
+    while (true)
+    {
+        msg = getmessage(EX_MOUSE);			// 获取消息输入
+
+        if (msg.message == WM_LBUTTONDOWN)
+        {
+            // 判断控件
+            if (EasyTextBoxCheck(&TxtID, msg.x, msg.y))	AdminEasyTextBoxOnMessage(&TxtID);
+
+            // 判断控件
+            if (EasyButtonCheck(&BtnOK, msg.x, msg.y))	AdminEasyButtonOnMessage(&BtnOK);
+
+            //判断控件
+            if (EasyButtonCheck(&BtnOUT, msg.x, msg.y))	AdminEasyButtonOnMessage(&BtnOUT);
+
+        }
+    }
+
 }
