@@ -75,6 +75,10 @@ vector<Student> ReturnStudent() {
 }
 
 
+std::string ReturnHeader() {
+	return Header;
+}
+
 /*
 	负责人：
 	功能：格式化数据用于数据的格式化

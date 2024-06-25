@@ -47,11 +47,37 @@ extern struct Student {
 
 // -------------------- service --------------------
 
+/*
+	负责人：
+	功能：返回管理员信息
+	参数：void
+	返回值：void
+*/
 User* ReturnUser();
 
+/*
+	负责人：
+	功能：返回用户数量
+	参数：void
+	返回值：void
+*/
 int ReturnUserCount();
 
+/*
+	负责人：
+	功能：返回Student私有属性
+	参数：void
+	返回值：void
+*/
 vector<Student> ReturnStudent();
+
+/*
+	负责人：
+	功能：返回Header私有属性
+	参数：void
+	返回值：void
+*/
+std::string ReturnHeader();
 
 /*
 	负责人：
@@ -80,64 +106,161 @@ void StudentFilein(const std::string& FileName);
 /*
 	负责人：
 	功能：读入文件信息
-	参数：无
+	参数：const std::string& FileName
 	返回值：void
 */
 void StudentFilenout(const std::string& FileName);
 
-// 注销账号
+
+/*
+	负责人：
+	功能：注销账号
+	参数：std::string name, std::string power
+	返回值：void
+*/
 bool resign(std::string name, std::string power);
 
-// 注册账号
+
+/*
+	负责人：
+	功能：注册账号
+	参数：std::string name, std::string power
+	返回值：void
+*/
 bool Sign(std::string name, std::string power);
 
 
-// 登入账号
+/*
+	负责人：
+	功能：登入账号
+	参数：std::string name, std::string power
+	返回值：void
+*/
 bool Login(std::string name, std::string power);
 
 //-------------计时模块-----------------
 
-// 对计时器进行初始化
+
+/*
+	负责人：
+	功能：对计时器进行初始化
+	参数：void
+	返回值：void
+*/
 void Timeinit();
 
-// 返回计时器状态
+
+/*
+	负责人：
+	功能：返回计时器状态
+	参数：bool
+	返回值：bool
+*/
 bool isPause();
  
+
+/*
+	负责人：
+	功能：返回计时器状态
+	参数：bool
+	返回值：bool
+*/
 bool isStop();
 
-// 计时器的三者功能
-void Start(); // 开始专注
-void Pause(); // 暂替专注专注
-void Stop();  // 停止1专注
+/// 计时器的三者功能
 
-// 获取时间 因为时间是一个很大是数据所以使用long
+
+/*
+	负责人：
+	功能：开始专注,返回计时器状态
+	参数：void
+	返回值：bool
+*/
+void Start(); 
+
+/*
+	负责人：
+	功能：暂停专注专注
+	参数：void
+	返回值：void
+*/
+void Pause();
+
+/*
+	负责人：
+	功能：停止专注
+	参数：void
+	返回值：void
+*/
+void Stop(); 
+
+
+/*
+	负责人：
+	功能：获取时间 因为时间是一个很大是数据所以使用long
+	参数：void
+	返回值：inline
+*/
 
 inline long getStartTime();
 
-// 设置专注时间, 定时计时, 暂时页面,逻辑功能实现
+/*
+	负责人：
+	功能：设置专注时间, 定时计时, 暂时页面,逻辑功能实现
+	参数：void
+	返回值：inline
+*/
 void TimePrint();
 
 //-------------------------------------
 
-// 游戏模块
+/*
+	负责人：
+	功能： 游戏模块
+	参数：void
+	返回值：void
+*/
 void game();
 
-// 作业接收
+/*
+	负责人：
+	功能： 作业接收
+	参数： void
+	返回值：void
+*/
 void WorkSendown();
 
 //作业提交
+/*
+	负责人：
+	功能： 作业提交
+	参数： void
+	返回值：void
+*/
 void WorkSendTo();
 
 /*
 	负责人：
 	功能：打开音乐
-	参数：无
+	参数：void
 	返回值：void
 */
 void OpenMusic();
 
+/*
+	负责人：
+	功能：关闭音乐
+	参数：void
+	返回值：void
+*/
 void CloseMusic();
 
+/*
+	负责人：
+	功能：神像打印
+	参数：void
+	返回值：void
+*/
 void T();
 // -------------------- view --------------------
 

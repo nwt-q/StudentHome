@@ -46,6 +46,22 @@ void StudentInfoDisplay();
 */
 void StudentInfoDisplay1();
 
+/*
+    负责人：
+    功能：管控管理员登入页面
+    参数：void
+    返回值：void
+*/
+void AdminPage();
+
+/*
+    负责人：
+    功能：管理员页面
+    参数：void
+    返回值：void
+*/
+void AdminView();
+
 // -------------------- view --------------------
 
 #endif // !_STUDENT_

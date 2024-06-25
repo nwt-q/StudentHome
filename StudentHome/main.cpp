@@ -31,9 +31,12 @@
 int main() {
 	initgraph(1280, 720, SHOWCONSOLE);
 	T();
+	//mciSendString(_T("open su.mp3 alias ../Music/backgroundMusic.mp3"), NULL, 0, NULL);//播放音乐
+	//mciSendString(_T("play ../Music/backgroundMusic.mp3 repeat"), NULL, 0, NULL);//循环播放
 	StudentFilenout("../Data/StudentData.txt");
 	/*LoginView();*/
-	StudentInfoDisplay();
+	FistPage();
+	/*StudentSendView();*/
 	StudentFilein("../Data/test.txt");
 	// 关闭图形模式
 	closegraph();

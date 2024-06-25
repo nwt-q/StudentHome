@@ -133,9 +133,37 @@ void EasyButtonOnMessage(EasyButton* NEW);
 */
 void On_btnOk_Click();
 
+/*
+    负责人：
+    功能：鼠标点击事件 & 光标定位
+    参数：EasyTextBox* NEW
+    返回值：bool
+*/
+void EasyTextBoxOnMessage(EasyTextBox* NEW);
+
+/*
+    负责人：
+    功能：密码文本框对文本框进行加密
+    参数：EasyTextBox* NEW
+    返回值：bool
+*/
+void EasyPBoxOnMessage(EasyTextBox* NEW);
+
+/*
+    负责人：
+    功能：登入界面窗口视图
+    参数：void
+    返回值：void
+*/
 void LoginView();
 
 
+/*
+    负责人：
+    功能：学生注册模块视图
+    参数：void
+    返回值：void
+*/
 void StudentSendView();
 
 
@@ -150,25 +178,86 @@ void StudentSendView();
 */
 void StudentshowButton(int x, int y, int width, int height, std::string str, int textSize, Color fillColor, Color textColor);
 
-// 游戏选择页面
+
+/*
+    负责人：
+    功能：游戏选择页面
+    参数：void
+    返回值：void
+*/
 void GameSelect();
-//学生页面
+
+/*
+    负责人：
+    功能：个人菜单页面
+    参数：void
+    返回值：void
+*/
+void PersonalInformation();
+
+/*
+    负责人：
+    功能：学生页面
+    参数：void
+    返回值：void
+*/
 void StudentmenuView();
 
-// 技术人员展示页面
+/*
+    负责人：
+    功能：技术人员展示页面
+    参数：void
+    返回值：void
+*/
 void ProductionGroupView();
 
-// 设置界面
+/*
+    负责人：
+    功能：设置界面
+    参数：void
+    返回值：void
+*/
 void StudentSettingView();
 
-
+/*
+    负责人：
+    功能：计时停止页面
+    参数：void
+    返回值：void
+*/
 void StopView();
 
-// 双缓冲防闪屏技术
+/*
+    负责人：
+    功能：管控学生登入注册
+    参数：void
+    返回值：void
+*/
+void StudentPage();
+
+/*
+    负责人：
+    功能： 应用第一页
+    参数：void
+    返回值：void
+*/
+void FistPage();
+
+/*
+    负责人：
+    功能： 双缓冲防闪屏技术
+    参数：void
+    返回值：void
+*/
 void TimeViewFPS(IMAGE& img);
 
-// 计时界面
-//设置耦合返回实现自习功能
+/// 计时界面  
+/*
+    负责人：
+    功能： 设置耦合返回实现自习功能
+    参数：void
+    返回值：void
+*/
 void TimeView();
 
 

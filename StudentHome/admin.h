@@ -32,28 +32,71 @@
 // https://blog.csdn.net/wangxun20081008/article/details/115033507 
 
 
-// 注销学生账号账号
+/*
+    负责人：
+    功能： 注销学生账号账号
+    参数：void
+    返回值：void
+*/
 bool resign(std::string name, std::string power);
 
-// 注册管理员账号账号
+
+/*
+    负责人：
+    功能： 注册管理员账号账号
+    参数：void
+    返回值：void
+*/
 bool sign(std::string name, std::string power);
 
-// 登入管理员账号账号
+/*
+    负责人：
+    功能： 登入管理员账号账号
+    参数：void
+    返回值：void
+*/
 bool Login(std::string name, std::string power);
 
-// 修改学生信息
+/*
+    负责人：
+    功能： 修改学生信息
+    参数：void
+    返回值：void
+*/
 void corrective(std::string name, std::string StudentID, std::string StudentClass);
 
-// 统计模块, 统计学生作业完成情况
+/*
+    负责人：
+    功能： 统计模块, 统计学生作业完成情况
+    参数：void
+    返回值：void
+*/
 void statistics();
 
-// 通知模块
+/*
+    负责人：
+    功能：  通知模块
+    参数：void
+    返回值：void
+*/
 void notice();
 
-// 作业发布
+
+/*
+    负责人：
+    功能：  作业发布
+    参数：void
+    返回值：void
+*/
 void WorkSendUp();
 
-// 登入页面菜单
+
+/*
+    负责人：
+    功能: 登入页面菜单
+    参数：void
+    返回值：void
+*/
 void AdminMenu();
 
 
