@@ -1,18 +1,4 @@
-﻿  AdminView.cpp
-D:\creatdome\onedome\demo\StudentHome\StudentHome\Student.h(34,2): warning C4091: “extern ”: 没有声明变量时忽略“User”的左侧
-  (编译源文件“AdminView.cpp”)
-  
-D:\creatdome\onedome\demo\StudentHome\StudentHome\Student.h(46,2): warning C4091: “extern ”: 没有声明变量时忽略“Student”的左侧
-  (编译源文件“AdminView.cpp”)
-  
-D:\creatdome\onedome\demo\StudentHome\StudentHome\StudentView.h(36,2): warning C4091: “extern ”: 没有声明变量时忽略“EasyTextBox”的左侧
-  (编译源文件“AdminView.cpp”)
-  
-D:\creatdome\onedome\demo\StudentHome\StudentHome\StudentView.h(46,2): warning C4091: “extern ”: 没有声明变量时忽略“EasyButton”的左侧
-  (编译源文件“AdminView.cpp”)
-  
-D:\creatdome\onedome\demo\StudentHome\StudentHome\AdminView.cpp(164,46): warning C4838: 从“int”转换到“unsigned __int64”需要收缩转换
-  StudentView.cpp
+﻿  StudentView.cpp
 D:\creatdome\onedome\demo\StudentHome\StudentHome\Student.h(34,2): warning C4091: “extern ”: 没有声明变量时忽略“User”的左侧
   (编译源文件“StudentView.cpp”)
   
