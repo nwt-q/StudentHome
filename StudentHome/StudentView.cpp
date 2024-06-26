@@ -411,13 +411,18 @@ void LoginView() {
     IMAGE img;/*声明一个IMAGE变量*/
     loadimage(&img, "../Photo/II.jpg", 1280, 720);/*变量地址，图片地址    相对地址“./”本目录下的文件进行访问   图片展示可以是png也可以是jpg*/
     putimage(0, 0, &img);/*展示图片*/
+
     setbkmode(TRANSPARENT); // 用于解决黑色背景图
+
     settextcolor(WHITE);
     settextstyle(60, 0, _T("华文新魏"));//设置字号、字体
     outtextxy(400, 200, "学生Todo");
+
     settextstyle(40, 0, _T("华文新魏")); //设置字号、字体
     outtextxy(280, 340, "用户名：");
+
     txtName = EasyTextBoxCreate(400, 330, 700, 375, 10);        // 创建用户名文本框控件
+
     settextstyle(40, 0, _T("华文新魏"));//设置字号、字体
     outtextxy(280, 400, "密　码 ");
     txtPwd = EasyTextBoxCreate(400, 400, 700, 445, 10);	
@@ -715,8 +720,6 @@ void ProductionGroupView()
     EndBatchDraw();
     StudentSettingView();
 }
-
-
 
 //学生设置页面
 void StudentSettingView() {

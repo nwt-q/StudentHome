@@ -24,8 +24,8 @@
 #undef _UNICODE
 
 /*
-* 麓芦陆篓脮脽 : 脢茅脡陆(EvLast)
-* 麓麓陆篓脢卤录盲 : 2024/6/6 12:10:55
+* 创建者 : 书山(EvLast)
+* 创建时间 : 2024/6/6 12:10:55
 */
 
 int main() {
@@ -35,8 +35,8 @@ int main() {
 	//mciSendString(_T("play ../Music/backgroundMusic.mp3 repeat"), NULL, 0, NULL);//循环播放
 	StudentFilenout("../Data/StudentData.txt");
 	/*LoginView();*/
-	/*FistPage();*/
-	CorrectiveView();
+	FistPage();
+	/*CorrectiveView();*/
 	/*StudentSendView();*/
 	StudentFilein("../Data/test.txt");
 	// 关闭图形模式
