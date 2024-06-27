@@ -90,12 +90,12 @@ namespace gameqoqo {
 	*/
 	struct Ball
 	{
-		int x;							//x坐标，横向
-		int y;							//y坐标，纵向
-		int r;							//半径
+		int x=0;							//x坐标，横向
+		int y=0;							//y坐标，纵向
+		int r=0;							//半径
 
-		double deltaX;					//X 的变化量，|deltaX| < 1 时，x不变; deltaX > 1时：x++,同时 deltaX -= 1; deltaX < -1: X--,同时deltaX+=1;
-		double deltaY;					//Y 的变化量，|deltaY| < 1 时，y不变; deltaY > 1时：y++,同时 deltaY -= 1; deltaY < -1; Y--,同时deltaY+=1;
+		double deltaX=0.0;					//X 的变化量，|deltaX| < 1 时，x不变; deltaX > 1时：x++,同时 deltaX -= 1; deltaX < -1: X--,同时deltaX+=1;
+		double deltaY=0.0;					//Y 的变化量，|deltaY| < 1 时，y不变; deltaY > 1时：y++,同时 deltaY -= 1; deltaY < -1; Y--,同时deltaY+=1;
 
 		string* imagesrc = nullptr;			//指向皮肤字符串路径的指针；只有玩家有，AI和食物的 imagesrc = nullptr;
 		Color RGB{ 0,0,0 };				//所有球的默认颜色为黑色	（游戏背景为白色）
@@ -820,7 +820,7 @@ namespace gameqoqo {
 
 	bool FPS()
 	{
-		const int const  Chick = 1000 / 60;
+		const int Chick = 1000 / 60;
 		static int startTime;
 		int endTime = clock();
 		if (endTime - startTime > Chick) {
@@ -940,14 +940,14 @@ namespace gameqoqo {
 			if (food[i].r)
 			{
 				setfillcolor(RGB(food[i].RGB.R, food[i].RGB.G, food[i].RGB.B));
-				solidcircle(getScale(food[i].x), getScale(food[i].y), food[i].r / scaleFactor);
+				solidcircle(getScale(food[i].x), getScale(food[i].y), (int)(food[i].r / scaleFactor));
 			}
 		}
 		if (Gamer.r)			//如果玩家存在，那么绘制玩家。（玩家被吃掉后，失败界面需要1秒才能弹出）
 		{
 			//绘制玩家
 			setfillcolor(BLUE);
-			solidcircle(getScale(Gamer.x), getScale(Gamer.y), Gamer.r / scaleFactor);
+			solidcircle(getScale(Gamer.x), getScale(Gamer.y), (int)(Gamer.r / scaleFactor));
 			double skinScaleFactor = (Gamer.r / scaleFactor) / 54.0;						//54是皮肤无缩放情况下，中心的圆的半径
 			IMAGE Skin;
 			loadimage(&Skin, Gamer.imagesrc->c_str(), 500 * skinScaleFactor, 281 * skinScaleFactor);					//无缩放状态下球的半径大小

@@ -161,7 +161,7 @@ void AdminEasyTextBoxShow(EasyTextBox* NEW) {
 */
 
 EasyTextBox AdminEasyTextBoxCreate(int x1, int y1, int x2, int y2, int maxn) {   // 其中的x1, y1, x2, y2
-    EasyTextBox NEW = { x1 , y1, x2, y2,NULL,maxn }; // 初始化坐标以及最大值
+    EasyTextBox NEW = { x1 , y1, x2, y2,NULL,(UINT64) maxn }; // 初始化坐标以及最大值
     NEW.text = new char[NEW.maxlen];  // 创建一个最大长度数组, 函数销毁时可能出现问题
     NEW.text[0] = 0; // 将文本放置于 0
     // 绘制用户界面
@@ -500,6 +500,7 @@ void AdminPage()
     settextstyle(15, 0, "");//设置字号、字体
     settextcolor(BLACK);
     BtnOK = AdminEasyButtonCreate(620, 470, 700, 495, "Login", AdminOn_btnOk_Click);	// 创建按钮控件
+    BtnOUT = AdminEasyButtonCreate(420, 470, 500, 495, "OUT", FistPage);	// 创建按钮控件
     settextstyle(30, 0, "");//设置字号、字体
 
     ExMessage msg;
@@ -517,6 +518,8 @@ void AdminPage()
 
             // 判断控件
             if (EasyButtonCheck(&BtnOK, msg.x, msg.y))	AdminEasyButtonOnMessage(&BtnOK);
+            //判断控件
+            if (EasyButtonCheck(&BtnOUT, msg.x, msg.y))	AdminEasyButtonOnMessage(&BtnOUT);
         }
     }
     return;

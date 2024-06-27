@@ -31,13 +31,6 @@ bool resign(std::string name, std::string power)
     return 0;
 }
 
-bool cmp(const Student x, const Student y) {
-    if (x.ID > y.ID) {
-        return true;
-    }
-    return false;
-}
-
 /*
     负责人：
     功能： 修改学生信息
@@ -45,11 +38,16 @@ bool cmp(const Student x, const Student y) {
     返回值：void
 */
 void corrective(std::string StudentID) {
-    for (int i = 0; i < ReturnStudent().size(); i++) {
-        if (ReturnStudent()[i].ID == StudentID) {
-            std::swap(ReturnStudent()[i], ReturnStudent().back()); // 将第8个元素和最后一个元素交换  
-            ReturnStudent().pop_back(); // 删除最后一个元素（现在是原来的第8个元素
-            sort(ReturnStudent().begin(), ReturnStudent().end(),cmp);  // 自定义排序规则
+    auto& AllStudents = ReturnStudent();
+
+    auto cmp = [&](const Student x, const Student y) {return x.ID <= y.ID; };
+
+    for (int i = 0; i < AllStudents.size(); i++) {
+        if (AllStudents[i].ID == StudentID) {
+            std::swap(AllStudents[i], AllStudents.back()); // 将第8个元素和最后一个元素交换  
+            AllStudents.pop_back(); // 删除最后一个元素（现在是原来的第8个元素
+            sort(AllStudents.begin(), AllStudents.end(),cmp);  // 自定义排序规则
+            break;
         }
     }
 }

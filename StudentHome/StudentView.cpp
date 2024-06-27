@@ -48,7 +48,10 @@ namespace gxb
 // 定义学生登入页面控件
 EasyTextBox txtName;
 EasyTextBox txtPwd;
+EasyTextBox txtID;
+EasyTextBox txtClass;
 EasyButton btnOK;
+EasyButton BtnOU;
 
 //定义学生注册页面控件
 
@@ -89,9 +92,8 @@ void EasyTextBoxShow(EasyTextBox* NEW) {
     参数：x1,y1,x2,y2, maxn
     返回值：void
 */
-
 EasyTextBox EasyTextBoxCreate(int x1, int y1, int x2, int y2, int maxn) {   // 其中的x1, y1, x2, y2
-    EasyTextBox NEW = { x1 , y1, x2, y2,NULL,maxn}; // 初始化坐标以及最大值
+    EasyTextBox NEW = { x1 , y1, x2, y2,NULL,(UINT64)maxn}; // 初始化坐标以及最大值
     NEW.text = new char[NEW.maxlen];  // 创建一个最大长度数组, 函数销毁时可能出现问题
     NEW.text[0] = 0; // 将文本放置于 0
     // 绘制用户界面
@@ -220,7 +222,12 @@ void On_btnOk_Click()
             MessageBox(GetHWnd(), txtName.text, "Hello", MB_OK); // 消息弹窗
             StudentmenuView();
         }
-    }
+    } 
+}
+
+void On_SendOk_Click()
+{
+
 }
 
 /*
@@ -241,7 +248,8 @@ void EasyTextBoxOnMessage(EasyTextBox* NEW)
     setfillcolor(WHITE);			// 设置填充颜色
     fillrectangle(NEW->left, NEW->top, NEW->right, NEW->bottom);
     outtextxy(NEW->left + 20, NEW->top + 15, NEW->text);
-
+    std::cout << NEW->left + 20 << endl;
+    std::cout << NEW->top + 15 << endl;
     int width = textwidth(NEW->text);	// 字符串总宽度
     int counter = 0;				// 光标闪烁计数器
     bool binput = true;				// 是否输入中
@@ -429,6 +437,7 @@ void LoginView() {
     settextstyle(15, 0,"");//设置字号、字体
     settextcolor(BLACK);
     btnOK = EasyButtonCreate(620, 470, 700, 495, "Login", On_btnOk_Click);	// 创建按钮控件
+    BtnOU = EasyButtonCreate(420, 470, 500, 495, "OUT", FistPage);	// 创建按钮控件
     settextstyle(30, 0, "");//设置字号、字体
 
     ExMessage msg;
@@ -446,6 +455,8 @@ void LoginView() {
 
             // 判断控件
             if (EasyButtonCheck(&btnOK,msg.x, msg.y))	EasyButtonOnMessage(&btnOK);
+
+            if (EasyButtonCheck(&BtnOU, msg.x, msg.y))	EasyButtonOnMessage(&BtnOU);
         }
     }
     return;
@@ -464,40 +475,62 @@ void LoginView() {
 */
 void StudentSendView()
 {
-
+    using namespace gxb;
     IMAGE img;
     loadimage(&img, "../Photo/19.png", 1280, 720);/*变量地址，图片地址    相对地址“./”本目录下的文件进行访问   图片展示可以是png也可以是jpg*/
     putimage(0, 0, &img);/*展示图片*/
+
     setbkmode(TRANSPARENT); // 用于解决黑色背景图
     settextcolor(BLACK);
+
     settextstyle(60, 0, _T("华文新魏"));//设置字号、字体
-    outtextxy(400, 200, "注册Todo");
+    outtextxy(400, 100, "注册Todo");
+
     settextcolor(BLACK);
     settextstyle(40, 0, _T("华文新魏"));//设置字号、字体
-    outtextxy(280, 340, "用户名：");
-    txtName = EasyTextBoxCreate(400, 330, 700, 375, 10);        // 创建用户名文本框控件
-    settextstyle(40, 0, _T("华文新魏"));//设置字号、字体
-    outtextxy(280, 400, "密　码：");
-    txtPwd = EasyTextBoxCreate(400, 400, 700, 445, 10);
-    settextstyle(15, 0, "");//设置字号、字体
-    btnOK = EasyButtonCreate(620, 470, 700, 495, "注册", On_btnOk_Click);	// 创建按钮控件
-    settextstyle(30, 0, "");//设置字号、字体
+    outtextxy(270, 240, "用户名：");
 
-    ExMessage msg;
+    txtName = EasyTextBoxCreate(400, 230, 700, 275, 10);        // 创建用户名文本框控件
+    settextstyle(40, 0, _T("华文新魏"));//设置字号、字体
+    outtextxy(270, 300, "密　码：");
+
+    txtPwd = EasyTextBoxCreate(400, 300, 700, 345, 10);
+
+    settextstyle(40, 0, _T("华文新魏"));//设置字号、字体
+    outtextxy(280, 380, " 学  号：");
+
+    txtID = EasyTextBoxCreate(400, 370, 700, 415, 10);
+
+    settextstyle(40, 0, _T("华文新魏"));//设置字号、字体
+
+    outtextxy(280, 440, " 班  级：");
+
+    txtClass = EasyTextBoxCreate(400, 440, 700, 485, 10);
+
+    settextstyle(15, 0, "");//设置字号、字体
+    BtnOU = EasyButtonCreate(420, 530, 500, 555, "OUT", FistPage);	// 创建按钮控件
+
+    settextstyle(15, 0, "");//设置字号、字体
+    btnOK = EasyButtonCreate(620, 530, 700, 555, "注册", On_btnOk_Click);	// 创建按钮控件
+
+
+    settextstyle(30, 0, "");//设置字号、字体
+    settextstyle(40, 0, _T("华文新魏"));//设置字号、字体
+
     while (true)
     {
         msg = getmessage(EX_MOUSE);			// 获取消息输入
 
         if (msg.message == WM_LBUTTONDOWN)
         {
-            // 判断控件
-            if (EasyTextBoxCheck(&txtName, msg.x, msg.y))	EasyTextBoxOnMessage(&txtName);
+            //// 判断控件
+            if (EasyTextBoxCheck(&txtName, msg.x, msg.y)) EasyTextBoxOnMessage(&txtName); //获取Name
+            else if (EasyTextBoxCheck(&txtPwd, msg.x, msg.y)) EasyTextBoxOnMessage(&txtPwd); // 获取Pwd
+            else if (EasyTextBoxCheck(&txtID, msg.x, msg.y)) EasyTextBoxOnMessage(&txtID); // 获取ID
+            else if (EasyTextBoxCheck(&txtClass, msg.x, msg.y)) EasyTextBoxOnMessage(&txtClass); // 获取Class
+            else if (EasyButtonCheck(&btnOK, msg.x, msg.y)) EasyButtonOnMessage(&btnOK);
+            else if (EasyButtonCheck(&BtnOU, msg.x, msg.y)) EasyButtonOnMessage(&BtnOU);
 
-            // 判断控件
-            if (EasyTextBoxCheck(&txtPwd, msg.x, msg.y))		EasyTextBoxOnMessage(&txtPwd);
-
-            // 判断控件
-            if (EasyButtonCheck(&btnOK, msg.x, msg.y))	EasyButtonOnMessage(&btnOK);
         }
     }
 
@@ -659,7 +692,7 @@ void StudentmenuView() {
             }
             if (msg.message == WM_LBUTTONDOWN && inArea(msg.x, msg.y, BUTTONX, 550, BUTTONW, BUTTONH))
             {
-                LoginView();
+                FistPage();
             }
             if (msg.message == WM_LBUTTONDOWN && inArea(msg.x, msg.y, 10, 10, 200, 100))
             {

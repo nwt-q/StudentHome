@@ -25,6 +25,7 @@
 #define MAXN 10
 // -------------------- 数据设计 --------------------
 
+
 //暂时性储存(管理员)
 extern struct User {
 	// 用户名
@@ -37,7 +38,7 @@ extern struct User {
 	负责人：
 	功能：学生信息存储
 */
-extern struct Student {
+struct Student {
 	std::string ID;// 学号 
 	std::string Name;//姓名
 	std::string Class;// 班级
@@ -69,7 +70,7 @@ int ReturnUserCount();
 	参数：void
 	返回值：void
 */
-vector<Student> ReturnStudent();
+vector<Student>& ReturnStudent();
 
 /*
 	负责人：

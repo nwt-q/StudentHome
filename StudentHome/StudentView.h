@@ -32,7 +32,7 @@ extern struct EasyTextBox
 {
     int left = 0, top = 0, right = 0, bottom = 0; // 控件坐标
     char* text = NULL;                         // 控件内容
-    unsigned __int64 maxlen = 0;                 // 文本框最大内容长度
+    UINT64 maxlen = 0;                 // 文本框最大内容长度
 };
 
 /*
@@ -135,10 +135,19 @@ void On_btnOk_Click();
 
 /*
     负责人：
+    功能：确定是否注册成功,按钮 btnOK 的点击事件
+    参数：EasyTextBox* NEW
+    返回值：void
+*/
+void On_SendOk_Click();
+
+/*
+    负责人：
     功能：鼠标点击事件 & 光标定位
     参数：EasyTextBox* NEW
     返回值：bool
 */
+
 void EasyTextBoxOnMessage(EasyTextBox* NEW);
 
 /*

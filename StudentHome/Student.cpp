@@ -71,7 +71,7 @@ Student* StudentIn(Student* NEWStudent, std::string ID, std::string Name, std::s
 
 // ---------------service-----------------
 
-vector<Student> ReturnStudent() {
+vector<Student>& ReturnStudent() {
 	return StudentM;
 }
 
@@ -164,7 +164,7 @@ void StudentFilenout(const std::string& FileName)
 		//用于储存学生信息
 		StudentM.push_back(Limit);
 
-		std::cout <<  Limit.ID << " " << Limit.Name << " " << Limit.Class << " " << Limit.Grade << " " << Limit.Power; // 测试
+		//std::cout <<  Limit.ID << " " << Limit.Name << " " << Limit.Class << " " << Limit.Grade << " " << Limit.Power; // 测试
 	}
 
 	read.close();

@@ -1,5 +1,5 @@
 /*
- Copyright WU DE QUAN. All rights reserved.
+ Copyright Wu DeQuan. All rights reserved.
 
  @Author: EvLast
  @Date: 2024/6/6 12:10:55
@@ -18,8 +18,8 @@
 */
 
 #include "AdminView.h"
-#include"StudentView.h"
-#include"Star.h"
+#include "StudentView.h"
+#include "Star.h"
 #undef UNICODE
 #undef _UNICODE
 
@@ -35,7 +35,8 @@ int main() {
 	//mciSendString(_T("play ../Music/backgroundMusic.mp3 repeat"), NULL, 0, NULL);//Ñ­»·²¥·Å
 	StudentFilenout("../Data/StudentData.txt");
 	/*LoginView();*/
-	FistPage();
+	/*FistPage();*/
+	StudentSendView();
 	/*CorrectiveView();*/
 	/*StudentSendView();*/
 	StudentFilein("../Data/test.txt");
