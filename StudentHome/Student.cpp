@@ -49,8 +49,8 @@ User* ReturnUser() {
 	return student;
 }
 
-int ReturnUserCount() {
-	return UserCount;
+int* ReturnUserCount() {
+	return &UserCount;
 }
 
 /*

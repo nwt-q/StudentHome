@@ -212,7 +212,7 @@ void EasyButtonOnMessage(EasyButton* NEW)
 void On_btnOk_Click()
 {
     User* user = ReturnUser();
-    int Usernum = ReturnUserCount();
+    int Usernum = *ReturnUserCount();
     for (int i = 0; i < Usernum; i++) {
         if (strcmp(user[i].power.c_str(), txtPwd.text) || strcmp(user[i].name.c_str(), txtName.text)) {
            if(i == Usernum - 1) MessageBox(GetHWnd(), "密码错误或用户名不存在", "错误", MB_OK);
@@ -227,7 +227,26 @@ void On_btnOk_Click()
 
 void On_SendOk_Click()
 {
-
+    User* user = ReturnUser();
+    int* Usernum = ReturnUserCount();
+    Student NEW;
+    for (int i = 0; i < *Usernum; i++) {
+        if (strcmp(user[i].power.c_str(), txtPwd.text) || strcmp(user[i].name.c_str(), txtName.text)) {
+            if (i == *Usernum - 1) {
+                user[*Usernum].name = txtName.text;
+                user[*Usernum].power = txtPwd.text;
+                (*Usernum)++;
+                NEW.Name = txtName.text; NEW.ID = txtID.text; NEW.Class = txtClass.text; NEW.Power = txtPwd.text;
+                ReturnStudent().push_back(NEW);
+                MessageBox(GetHWnd(), "用户已经注册", "正确", MB_OK); // 消息弹窗
+                return;
+            }
+        }
+        else // 如果登入成功
+        {
+            MessageBox(GetHWnd(), "用户已经注册", "错误", MB_OK); // 消息弹窗
+        }
+    }
 }
 
 /*
@@ -511,7 +530,7 @@ void StudentSendView()
     BtnOU = EasyButtonCreate(420, 530, 500, 555, "OUT", FistPage);	// 创建按钮控件
 
     settextstyle(15, 0, "");//设置字号、字体
-    btnOK = EasyButtonCreate(620, 530, 700, 555, "注册", On_btnOk_Click);	// 创建按钮控件
+    btnOK = EasyButtonCreate(620, 530, 700, 555, "注册", On_SendOk_Click);	// 创建按钮控件
 
 
     settextstyle(30, 0, "");//设置字号、字体
@@ -707,8 +726,8 @@ void StudentmenuView() {
 void ProductionGroupView()
 {
     const string kText = "制作组信息"; // 需要滚动显示的文本内容
-    const string kTextArr[9] = { "组名：第12组","组长：吴德全","组员：肖舜昌","组员：于在熙",
-                            "组员：钟欣" };
+    const string kTextArr[9] = { "组名：第12组","组长：书山","产品经理：书山","技术官：书山",
+                                "音乐：书山","皮肤界面：书山" };
     ExMessage m;
 
     int y = 720;

@@ -62,7 +62,7 @@ User* ReturnUser();
 	参数：void
 	返回值：void
 */
-int ReturnUserCount();
+int* ReturnUserCount();
 
 /*
 	负责人：

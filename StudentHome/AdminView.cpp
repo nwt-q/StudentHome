@@ -280,7 +280,7 @@ void AdminEasyButtonOnMessage(EasyButton* NEW)
 void AdminOn_btnOk_Click()
 {
     User* user = ReturnUser();
-    int Usernum = ReturnUserCount();
+    int Usernum = *ReturnUserCount();
     for (int i = 0; i < Usernum; i++) {
         if (strcmp(user[i].power.c_str(), TxtPwd.text) || strcmp(user[i].name.c_str(), TxtName.text)) {
             if (i == Usernum - 1) MessageBox(GetHWnd(), "密码错误或用户名不存在", "错误", MB_OK);
