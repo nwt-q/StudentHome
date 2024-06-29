@@ -20,6 +20,9 @@ void StudentInfoDisplay()
     setbkmode(TRANSPARENT);
     StudentshowButton(1, 15, 100, 50, "返回菜单", 20, fillColor, textColor);
     StudentshowButton(1145, 15, 100, 50, "下一页", 20, fillColor, textColor);  //Header
+    IMAGE right;
+    loadimage(&right, "../Photo/right.png", 120, 100);/*变量地址，图片地址    相对地址“./”本目录下的文件进行访问   图片展示可以是png也可以是jpg*/
+    putimage(1, 15, &right);/*展示图片*/
     settextcolor(BLACK);
     settextstyle(60, 0, _T("华文新魏"));//设置字号、字体
     outtextxy(IDX - 20, 120, _T("学号"));
@@ -279,17 +282,13 @@ void AdminEasyButtonOnMessage(EasyButton* NEW)
 */
 void AdminOn_btnOk_Click()
 {
-    User* user = ReturnUser();
-    int Usernum = *ReturnUserCount();
-    for (int i = 0; i < Usernum; i++) {
-        if (strcmp(user[i].power.c_str(), TxtPwd.text) || strcmp(user[i].name.c_str(), TxtName.text)) {
-            if (i == Usernum - 1) MessageBox(GetHWnd(), "密码错误或用户名不存在", "错误", MB_OK);
-        }
-        else // 如果登入成功
-        {
-            MessageBox(GetHWnd(), TxtName.text, "Hello 尊贵的管理员", MB_OK); // 消息弹窗
-            AdminView();
-        }
+    if (strcmp("admin", TxtName.text) && strcmp("123456", TxtPwd.text)) MessageBox(GetHWnd(), "登入错误", "错误", MB_OK);
+    else if (!strcmp("123456", TxtPwd.text) && strcmp("admin", TxtName.text)) MessageBox(GetHWnd(), "管理员名错误", "错误", MB_OK);
+    else if (!strcmp("admin", TxtName.text) && strcmp("123456", TxtPwd.text)) MessageBox(GetHWnd(), "管理员密码错误", "错误", MB_OK); 
+    else // 如果登入成功
+    {
+        MessageBox(GetHWnd(), TxtName.text, "Hello 尊贵的管理员", MB_OK); // 消息弹窗
+        AdminView();
     }
 }
 

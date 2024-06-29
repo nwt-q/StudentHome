@@ -35,8 +35,8 @@ int main() {
 	//mciSendString(_T("play ../Music/backgroundMusic.mp3 repeat"), NULL, 0, NULL);//Ñ­»·²¥·Å
 	StudentFilenout("../Data/StudentData.txt");
 	/*LoginView();*/
-	/*FistPage();*/
-	StudentSendView();
+	//FistPage();
+	StudentInfoDisplay();
 	/*CorrectiveView();*/
 	/*StudentSendView();*/
 	StudentFilein("../Data/test.txt");

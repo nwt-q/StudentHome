@@ -267,8 +267,6 @@ void EasyTextBoxOnMessage(EasyTextBox* NEW)
     setfillcolor(WHITE);			// 设置填充颜色
     fillrectangle(NEW->left, NEW->top, NEW->right, NEW->bottom);
     outtextxy(NEW->left + 20, NEW->top + 15, NEW->text);
-    std::cout << NEW->left + 20 << endl;
-    std::cout << NEW->top + 15 << endl;
     int width = textwidth(NEW->text);	// 字符串总宽度
     int counter = 0;				// 光标闪烁计数器
     bool binput = true;				// 是否输入中

@@ -40,7 +40,7 @@ namespace gameqoqo {
 	static double mapDeltaY = 0;
 
 	const string voiceSRC = "../Music/backgroundMusic.mp3";				//背景音乐的文件路径
-	const string BackGround = "../background/4.jpg";			//开始界面(菜单)背景的文件路径
+	const string BackGround = "../background/5.jpg";			//开始界面(菜单)背景的文件路径
 	const int skinCount = 6;								//皮肤数量
 	string gamerSkins[skinCount] =
 	{ "../Skins/皮肤一.png","../Skins/皮肤二.png","../Skins/皮肤三.png",
@@ -105,8 +105,6 @@ namespace gameqoqo {
 	Ball AI[AICount];				//AI
 	Ball food[2 * minFoodNumber];		//食物
 	//------------------数据设计------------------
-
-
 
 	//--------------------------service--------------------------
 
@@ -896,10 +894,15 @@ namespace gameqoqo {
 		IMAGE img;
 		loadimage(&img, BackGround.c_str(), windowsWidth, windowsHeight, true);//背景图片
 		putimage(0, 0, &img);
-		showButton(BUTTONX, 100, BUTTONW, BUTTONH, "开始游戏", 48, fillColor, textColor);
-		showButton(BUTTONX, 250, BUTTONW, BUTTONH, "皮肤选择", 48, fillColor, textColor);
-		showButton(BUTTONX, 400, BUTTONW, BUTTONH, "进入设置", 48, fillColor, textColor);
-		showButton(BUTTONX, 550, BUTTONW, BUTTONH, "退出游戏", 48, fillColor, textColor);
+		setbkmode(TRANSPARENT); // 用于解决黑色背景图
+		settextcolor(BLACK);
+		settextstyle(30, 0, _T("华文新魏")); //设置字号、字体
+		outtextxy(1150, 300, _T("皮 肤"));
+		showButton(1050, 550, BUTTONW, BUTTONH, "进入设置", 48, fillColor, textColor);
+		showButton(20, 30, BUTTONW, BUTTONH, "退出游戏", 48, fillColor, textColor);
+		IMAGE Start;
+		loadimage(&Start, "../Photo/Start1.jpg" , BUTTONW + 65, BUTTONH, true);//背景图片
+		putimage(520, 550, &Start);
 
 		while (1)
 		{
@@ -907,19 +910,19 @@ namespace gameqoqo {
 			while (peekmessage(&msg, EM_MOUSE))
 			{
 				//判断是否点击
-				if (msg.message == WM_LBUTTONDOWN && inArea(msg.x, msg.y, BUTTONX, 100, BUTTONW, BUTTONH))
+				if (msg.message == WM_LBUTTONDOWN && inArea(msg.x, msg.y, 520, 550, BUTTONW + 65, BUTTONH))
 				{
 					gameStart();
 				}
-				if (msg.message == WM_LBUTTONDOWN && inArea(msg.x, msg.y, BUTTONX, 250, BUTTONW, BUTTONH))
+				if (msg.message == WM_LBUTTONDOWN && inArea(msg.x, msg.y, 1050, 100, BUTTONW, 200))
 				{
 					skinChoiceView();
 				}
-				if (msg.message == WM_LBUTTONDOWN && inArea(msg.x, msg.y, BUTTONX, 400, BUTTONW, BUTTONH))
+				if (msg.message == WM_LBUTTONDOWN && inArea(msg.x, msg.y, 1050, 550, BUTTONW, BUTTONH))
 				{
 					settingView();
 				}
-				if (msg.message == WM_LBUTTONDOWN && inArea(msg.x, msg.y, BUTTONX, 550, BUTTONW, BUTTONH))
+				if (msg.message == WM_LBUTTONDOWN && inArea(msg.x, msg.y, 20, 30, BUTTONW, BUTTONH))
 				{
 					ReturnStudent();
 				}
@@ -964,6 +967,16 @@ namespace gameqoqo {
 		}
 
 		EndBatchDraw();
+	}
+
+	void transparentImage(int x, int y, IMAGE* srcimg)
+	{
+		HDC dstDC = GetImageHDC(nullptr);
+		HDC srcDC = GetImageHDC(srcimg);
+		int width = srcimg->getwidth();
+		int height = srcimg->getheight();
+		BLENDFUNCTION bf = { AC_SRC_OVER, 0, 255, AC_SRC_ALPHA };
+		AlphaBlend(dstDC, x, y, width, height, srcDC, 0, 0, width, height, bf);
 	}
 
 	void gameStart()
@@ -1314,6 +1327,9 @@ namespace gameqoqo {
 	void skinChoiceView() {
 		setbkcolor(GREEN);
 		cleardevice();
+		IMAGE bground;
+		loadimage(&bground, "../Photo/II.jpg", windowsWidth, windowsHeight);
+		putimage(0, 0, &bground);
 		IMAGE Png;
 		for (int i = 0; i < skinCount; ++i) {
 			loadimage(&Png, gamerSkins[i].c_str());
@@ -1390,17 +1406,6 @@ namespace gameqoqo {
 				}
 			}
 		}
-	}
-
-
-	void transparentImage(int x, int y, IMAGE* srcimg)
-	{
-		HDC dstDC = GetImageHDC(nullptr);
-		HDC srcDC = GetImageHDC(srcimg);
-		int width = srcimg->getwidth();
-		int height = srcimg->getheight();
-		BLENDFUNCTION bf = { AC_SRC_OVER, 0, 255, AC_SRC_ALPHA };
-		AlphaBlend(dstDC, x, y, width, height, srcDC, 0, 0, width, height, bf);
 	}
 
 	void musicChangeView()
