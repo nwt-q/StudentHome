@@ -47,7 +47,9 @@ void corrective(std::string StudentID) {
             std::swap(AllStudents[i], AllStudents.back()); // 将第8个元素和最后一个元素交换  
             AllStudents.pop_back(); // 删除最后一个元素（现在是原来的第8个元素
             sort(AllStudents.begin(), AllStudents.end(),cmp);  // 自定义排序规则
-            break;
+            MessageBox(GetHWnd(), "学生信息已经删除成功", "尊贵的管理员", MB_OK); // 消息弹窗
+            return;
         }
     }
+    MessageBox(GetHWnd(), "学生信息删除失败", "尊贵的管理员", MB_OK); // 消息弹窗
 }

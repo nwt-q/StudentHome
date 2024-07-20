@@ -18,11 +18,14 @@ void StudentInfoDisplay()
     loadimage(&img, "../Photo/20.png", 1280, 720);/*变量地址，图片地址    相对地址“./”本目录下的文件进行访问   图片展示可以是png也可以是jpg*/
     putimage(0, 0, &img);/*展示图片*/
     setbkmode(TRANSPARENT);
-    StudentshowButton(1, 15, 100, 50, "返回菜单", 20, fillColor, textColor);
+    //StudentshowButton(1, 15, 100, 50, "返回菜单", 20, fillColor, textColor);
     StudentshowButton(1145, 15, 100, 50, "下一页", 20, fillColor, textColor);  //Header
     IMAGE right;
-    loadimage(&right, "../Photo/right.png", 120, 100);/*变量地址，图片地址    相对地址“./”本目录下的文件进行访问   图片展示可以是png也可以是jpg*/
-    putimage(1, 15, &right);/*展示图片*/
+    IMAGE Right;
+    loadimage(&Right, "../Photo/right1.jpg", 120, 100);/*变量地址，图片地址    相对地址“./”本目录下的文件进行访问   图片展示可以是png也可以是jpg*/
+    putimage(1, 15, &Right,SRCPAINT);/*展示图片*/
+    loadimage(&right, "../Photo/right.jpg", 120, 100);/*变量地址，图片地址    相对地址“./”本目录下的文件进行访问   图片展示可以是png也可以是jpg*/
+    putimage(1, 15, &right, SRCAND);/*展示图片*/
     settextcolor(BLACK);
     settextstyle(60, 0, _T("华文新魏"));//设置字号、字体
     outtextxy(IDX - 20, 120, _T("学号"));
