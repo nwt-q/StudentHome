@@ -4,7 +4,7 @@
 
 #include "../include/EasyButton.h"
 
-EasyButton::EasyButton(int x, int y, int width, int height, std::string str, int textSize, Color fillColor,
+EasyxxButton::EasyxxButton(int x, int y, int width, int height, std::string str, int textSize, Color fillColor,
                        Color textColor) {
     setfillcolor(RGB(fillColor.R, fillColor.G, fillColor.B));
     fillroundrect(x, y, x + width, y + height, width / 10, width / 10);
@@ -16,7 +16,7 @@ EasyButton::EasyButton(int x, int y, int width, int height, std::string str, int
     outtextxy(x + w, y + h, str.c_str());
 }
 
-void EasyButton::EasyButtonShow()
+void EasyxxButton::EasyButtonShow()
 {
     // 备份环境
     int oldlinecolor = getlinecolor();
@@ -35,23 +35,23 @@ void EasyButton::EasyButtonShow()
 }
 
 
-bool EasyButton::EasyTextBoxCheck(EasyTextBox *NEW, int x, int y)
-{
-    return (NEW->right >= x && NEW->left <= x && NEW->top <= y && NEW->bottom >= y);
-}
+//bool EasyxxButton::EasyTextBoxCheck(EasyTextBox *NEW, int x, int y)
+//{
+//    return (NEW->right >= x && NEW->left <= x && NEW->top <= y && NEW->bottom >= y);
+//}
 
-EasyButton::EasyButton() {
-
-}
-
-EasyButton::EasyButton(int x, int y, int width, int height) {
+EasyxxButton::EasyxxButton() {
 
 }
 
-EasyButton::EasyButton(int x, int y, int width, int height, std::string str, void (*userfunc)()) {
+EasyxxButton::EasyxxButton(int x, int y, int width, int height) {
 
 }
 
-EasyButton::EasyButton(int i, int i1, int i2, int i3, const char *string, int n) {
+EasyxxButton::EasyxxButton(int x, int y, int width, int height, std::string str, void (*userfunc)()) {
+
+}
+
+EasyxxButton::EasyxxButton(int i, int i1, int i2, int i3, const char *string, int n) {
 
 }

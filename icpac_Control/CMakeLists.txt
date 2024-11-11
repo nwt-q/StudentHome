@@ -24,10 +24,6 @@ add_executable(icpac_Control ${DIR_SRC} ${DIR_LIB}
         include/LoginRegisterModule.h
         src/CalculagraphModel.cpp
         include/CalculagraphModel.h
-        src/Teacher.cpp
-        include/Teacher.h
-        lib/lib-easyx/src/EasyButton.cpp
-        lib/lib-easyx/include/EasyButton.h
 )
 
 add_subdirectory ("tests/AdminViewTest")

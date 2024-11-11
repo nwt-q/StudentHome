@@ -49,18 +49,6 @@ cmake_ninja_workdir = D$:/creatdome/onedome/demo/StudentHome/icpac_Control/cmake
 
 build cmake_object_order_depends_target_icpac_Control: phony || CMakeFiles/icpac_Control.dir
 
-build CMakeFiles/icpac_Control.dir/src/AdminView.cpp.obj: CXX_COMPILER__icpac_Control_unscanned_Debug D$:/creatdome/onedome/demo/StudentHome/icpac_Control/src/AdminView.cpp || cmake_object_order_depends_target_icpac_Control
-  DEP_FILE = CMakeFiles\icpac_Control.dir\src\AdminView.cpp.obj.d
-  FLAGS = -g -std=gnu++17 -fdiagnostics-color=always
-  OBJECT_DIR = CMakeFiles\icpac_Control.dir
-  OBJECT_FILE_DIR = CMakeFiles\icpac_Control.dir\src
-
-build CMakeFiles/icpac_Control.dir/src/All.cpp.obj: CXX_COMPILER__icpac_Control_unscanned_Debug D$:/creatdome/onedome/demo/StudentHome/icpac_Control/src/All.cpp || cmake_object_order_depends_target_icpac_Control
-  DEP_FILE = CMakeFiles\icpac_Control.dir\src\All.cpp.obj.d
-  FLAGS = -g -std=gnu++17 -fdiagnostics-color=always
-  OBJECT_DIR = CMakeFiles\icpac_Control.dir
-  OBJECT_FILE_DIR = CMakeFiles\icpac_Control.dir\src
-
 build CMakeFiles/icpac_Control.dir/src/CalculagraphModel.cpp.obj: CXX_COMPILER__icpac_Control_unscanned_Debug D$:/creatdome/onedome/demo/StudentHome/icpac_Control/src/CalculagraphModel.cpp || cmake_object_order_depends_target_icpac_Control
   DEP_FILE = CMakeFiles\icpac_Control.dir\src\CalculagraphModel.cpp.obj.d
   FLAGS = -g -std=gnu++17 -fdiagnostics-color=always
@@ -85,35 +73,11 @@ build CMakeFiles/icpac_Control.dir/src/StudentModel.cpp.obj: CXX_COMPILER__icpac
   OBJECT_DIR = CMakeFiles\icpac_Control.dir
   OBJECT_FILE_DIR = CMakeFiles\icpac_Control.dir\src
 
-build CMakeFiles/icpac_Control.dir/src/StudentView.cpp.obj: CXX_COMPILER__icpac_Control_unscanned_Debug D$:/creatdome/onedome/demo/StudentHome/icpac_Control/src/StudentView.cpp || cmake_object_order_depends_target_icpac_Control
-  DEP_FILE = CMakeFiles\icpac_Control.dir\src\StudentView.cpp.obj.d
-  FLAGS = -g -std=gnu++17 -fdiagnostics-color=always
-  OBJECT_DIR = CMakeFiles\icpac_Control.dir
-  OBJECT_FILE_DIR = CMakeFiles\icpac_Control.dir\src
-
-build CMakeFiles/icpac_Control.dir/src/Teacher.cpp.obj: CXX_COMPILER__icpac_Control_unscanned_Debug D$:/creatdome/onedome/demo/StudentHome/icpac_Control/src/Teacher.cpp || cmake_object_order_depends_target_icpac_Control
-  DEP_FILE = CMakeFiles\icpac_Control.dir\src\Teacher.cpp.obj.d
-  FLAGS = -g -std=gnu++17 -fdiagnostics-color=always
-  OBJECT_DIR = CMakeFiles\icpac_Control.dir
-  OBJECT_FILE_DIR = CMakeFiles\icpac_Control.dir\src
-
-build CMakeFiles/icpac_Control.dir/src/admin.cpp.obj: CXX_COMPILER__icpac_Control_unscanned_Debug D$:/creatdome/onedome/demo/StudentHome/icpac_Control/src/admin.cpp || cmake_object_order_depends_target_icpac_Control
-  DEP_FILE = CMakeFiles\icpac_Control.dir\src\admin.cpp.obj.d
-  FLAGS = -g -std=gnu++17 -fdiagnostics-color=always
-  OBJECT_DIR = CMakeFiles\icpac_Control.dir
-  OBJECT_FILE_DIR = CMakeFiles\icpac_Control.dir\src
-
 build CMakeFiles/icpac_Control.dir/src/main.cpp.obj: CXX_COMPILER__icpac_Control_unscanned_Debug D$:/creatdome/onedome/demo/StudentHome/icpac_Control/src/main.cpp || cmake_object_order_depends_target_icpac_Control
   DEP_FILE = CMakeFiles\icpac_Control.dir\src\main.cpp.obj.d
   FLAGS = -g -std=gnu++17 -fdiagnostics-color=always
   OBJECT_DIR = CMakeFiles\icpac_Control.dir
   OBJECT_FILE_DIR = CMakeFiles\icpac_Control.dir\src
-
-build CMakeFiles/icpac_Control.dir/lib/lib-easyx/src/EasyButton.cpp.obj: CXX_COMPILER__icpac_Control_unscanned_Debug D$:/creatdome/onedome/demo/StudentHome/icpac_Control/lib/lib-easyx/src/EasyButton.cpp || cmake_object_order_depends_target_icpac_Control
-  DEP_FILE = CMakeFiles\icpac_Control.dir\lib\lib-easyx\src\EasyButton.cpp.obj.d
-  FLAGS = -g -std=gnu++17 -fdiagnostics-color=always
-  OBJECT_DIR = CMakeFiles\icpac_Control.dir
-  OBJECT_FILE_DIR = CMakeFiles\icpac_Control.dir\lib\lib-easyx\src
 
 
 # =============================================================================
@@ -123,7 +87,7 @@ build CMakeFiles/icpac_Control.dir/lib/lib-easyx/src/EasyButton.cpp.obj: CXX_COM
 #############################################
 # Link the executable icpac_Control.exe
 
-build icpac_Control.exe: CXX_EXECUTABLE_LINKER__icpac_Control_Debug CMakeFiles/icpac_Control.dir/src/AdminView.cpp.obj CMakeFiles/icpac_Control.dir/src/All.cpp.obj CMakeFiles/icpac_Control.dir/src/CalculagraphModel.cpp.obj CMakeFiles/icpac_Control.dir/src/LoginRegisterModule.cpp.obj CMakeFiles/icpac_Control.dir/src/Star.cpp.obj CMakeFiles/icpac_Control.dir/src/StudentModel.cpp.obj CMakeFiles/icpac_Control.dir/src/StudentView.cpp.obj CMakeFiles/icpac_Control.dir/src/Teacher.cpp.obj CMakeFiles/icpac_Control.dir/src/admin.cpp.obj CMakeFiles/icpac_Control.dir/src/main.cpp.obj CMakeFiles/icpac_Control.dir/lib/lib-easyx/src/EasyButton.cpp.obj
+build icpac_Control.exe: CXX_EXECUTABLE_LINKER__icpac_Control_Debug CMakeFiles/icpac_Control.dir/src/CalculagraphModel.cpp.obj CMakeFiles/icpac_Control.dir/src/LoginRegisterModule.cpp.obj CMakeFiles/icpac_Control.dir/src/Star.cpp.obj CMakeFiles/icpac_Control.dir/src/StudentModel.cpp.obj CMakeFiles/icpac_Control.dir/src/main.cpp.obj
   FLAGS = -g
   LINK_LIBRARIES = -Wl,-Bstatic  -leasyx  -Wl,-Bdynamic  -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
   LINK_PATH = -LD:/creatdome/onedome/demo/StudentHome/icpac_Control/winmm

@@ -42,12 +42,7 @@ using namespace std;
 		R,G,B：颜色的RGB属性
 		随机颜色时，可以通过随机R，G，B来随机颜色
 */
-//struct Color
-//{
-//	cs_byte R;
-//	cs_byte G;
-//	cs_byte B;
-//};
+
 
 //------------------数据设计------------------
 

@@ -28,7 +28,7 @@
 /*
     功能：实现管控按键
 */
-struct EasyButton;
+struct EasyxButton;
 /*
     功能：设计文本框控件
 */
@@ -36,10 +36,14 @@ struct EasyTextBox;
 
 struct Color;
 
+struct EasyxButton;
+
 // -------------------- service --------------------
 // 后面重构成 QT
 class WindowController {
 public:
+    WindowController();
+    ~WindowController();
     /*
         功能：绘制用户界面
         参数：void
@@ -73,42 +77,37 @@ public:
         参数：EasyButton* NEW
         返回值：void
     */
-    void EasyButtonShow(EasyButton* NEW);
+    void EasyButtonShow(EasyxButton* NEW);
 
     /*
         功能：用于初始化数据
         参数：x1,y1,x2,y2, title  (*func)()
         返回值：void
     */
-    EasyButton EasyButtonCreate(int x1, int y1, int x2, int y2, const char* title, void (*func)());
+    EasyxButton EasyxButtonCreate(int x1, int y1, int x2, int y2, const char* title, void (*func)());
 
     /*
         功能：删除元素数据
         参数：EasyTextBox* NEW
         返回值：void
     */
-    void EasyButtonDelete(EasyButton* NEW);
+    void EasyButtonDelete(EasyxButton* NEW);
 
     /*
         功能：查看是否在区域内
         参数：EasyTextBox* NEW
         返回值：bool
     */
-    bool EasyButtonCheck(EasyButton* NEW, int x, int y);
+    bool EasyButtonCheck(EasyxButton* NEW, int x, int y);
 
     /*
         功能：调用返回函数
         参数：EasyTextBox* NEW
         返回值：void
     */
-    void EasyButtonOnMessage(EasyButton* NEW);
+    void EasyButtonOnMessage(EasyxButton* NEW);
 
-    /*
-        功能：确定是否登入成功,按钮 btnOK 的点击事件
-        参数：EasyTextBox* NEW
-        返回值：void
-    */
-    int On_btnOk_Click();
+
 
     /*
         功能：确定是否注册成功,按钮 btnOK 的点击事件
@@ -230,6 +229,12 @@ private:
 
 };
 
+/*
+    功能：确定是否登入成功,按钮 btnOK 的点击事件
+    参数：EasyTextBox* NEW
+    返回值：void
+*/
+void On_btnOk_Click();
 
 // -------------------- view --------------------
 

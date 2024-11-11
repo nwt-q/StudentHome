@@ -17,9 +17,8 @@
  limitations under the License.
 */
 #pragma comment(lib,"WINMM.LIB")
-#include "../include/AdminView.h"
 #include "../include/StudentView.h"
-#include "../include/Star.h"
+//#include "../include/Star.h"
 #include "../include/game.h"
 using namespace gameqoqo;
 
@@ -29,26 +28,10 @@ using namespace gameqoqo;
 /*
 * 创建者 : 书山(EvLast)
 * 创建时间 : 2024/6/6 12:10:55
+* 重构时间 : 2024/11/11 9:10:55
 */
 int main() {
-	initgraph(1280, 720, SHOWCONSOLE);
 	T();
-
-    auto Window = new WindowController();
-
-    Window->FistPage();
-
-    //mciSendString("open Summer.mp3 alias ../resources/Music/backgroundMusic.mp3",NULL,0,NULL);
-
-//    StudentFilenout("../resources/Data/StudentData.txt");
-//    WindowController* w  = new WindowController();
-//    w->FistPage();
-//	StudentFilein("../resources/Data/test.txt");
-    /*initgraph(windowsWidth, windowsHeight, EX_MOUSE);*/
-    //打开背景乐：
-    //changeMusic();
-//    menuView();
-//	// 关闭图形模式
-   closegraph();
+    
     return 0;
 }
