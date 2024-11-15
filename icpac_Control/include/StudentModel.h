@@ -22,7 +22,6 @@
 #ifndef _STUDENT_
 #define _STUDENT_
 
-#include "All.h"
 #include "LoginRegisterModule.h"
 
 #define MAXN 10
@@ -35,18 +34,19 @@ struct User {
 	//用户密码
 	std::string power;
 };
+/// struct 结构体转换为StudentModel中的类
 
-/*
-	负责人：
-	功能：学生信息存储
-*/
-struct Student {
-	std::string ID;// 学号 
-	std::string Name;//姓名
-	std::string Class;// 班级
-	std::string Grade;//成绩
-	std::string Power;//成绩
-};
+///*
+//	负责人：
+//	功能：学生信息存储
+//*/
+//struct Student {
+//	std::string ID;// 学号
+//	std::string Name;//姓名
+//	std::string Class;// 班级
+//	std::string Grade;//成绩
+//	std::string Power;//成绩
+//};
 
 // -------------------- service --------------------
 
@@ -57,7 +57,7 @@ public:
         参数：std::string ID,std::string Name,std::string Class,std::string Grade,Student* NEWStudent
         返回值：Student*
     */
-    Student* StudentIn(Student* NEWStudent, std::string ID, std::string Name, std::string Class, std::string Grade, std::string Power);
+    StudentModel(std::string ID, std::string Name, std::string Class, std::string Grade, std::string Power);
 
     /*
         功能：注销账号

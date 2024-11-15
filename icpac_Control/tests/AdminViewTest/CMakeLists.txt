@@ -19,4 +19,3 @@ include_directories ("src" RED)
 link_libraries(libeasyx.a)
 
 link_directories(winmm)
-

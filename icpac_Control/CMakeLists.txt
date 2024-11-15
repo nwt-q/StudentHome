@@ -6,10 +6,11 @@ cmake_minimum_required(VERSION 3.27)
 project(icpac_Control)
 
 
-set (CMAKE_CXX_STANDARD_REQUIRED ON)
+#set (CMAKE_CXX_STANDARD_REQUIRED ON)
 
 aux_source_directory("src" DIR_SRC)
 aux_source_directory("include" DIR_LIB)
+aux_source_directory("resources" DIR_RES)
 
 set(CMAKE_CXX_STANDARD 17)
 
@@ -24,6 +25,12 @@ add_executable(icpac_Control ${DIR_SRC} ${DIR_LIB}
         include/LoginRegisterModule.h
         src/CalculagraphModel.cpp
         include/CalculagraphModel.h
+        include/Star.h
+        src/UserView.cpp
+        include/UserView.h
+        ${1_LIB}
 )
 
 add_subdirectory ("tests/AdminViewTest")
+
+add_subdirectory ("include/game/2048")

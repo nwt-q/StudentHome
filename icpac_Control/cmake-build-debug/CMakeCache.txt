@@ -14,6 +14,15 @@
 # EXTERNAL cache entries
 ########################
 
+//Value Computed by CMake
+2048_BINARY_DIR:STATIC=D:/creatdome/onedome/demo/StudentHome/icpac_Control/cmake-build-debug/include/game/2048
+
+//Value Computed by CMake
+2048_IS_TOP_LEVEL:STATIC=OFF
+
+//Value Computed by CMake
+2048_SOURCE_DIR:STATIC=D:/creatdome/onedome/demo/StudentHome/icpac_Control/include/game/2048
+
 //Path to a program.
 CMAKE_ADDR2LINE:FILEPATH=D:/MinGW/MinGW/bin/addr2line.exe
 
@@ -363,7 +372,7 @@ CMAKE_MODULE_LINKER_FLAGS_RELWITHDEBINFO-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_NM
 CMAKE_NM-ADVANCED:INTERNAL=1
 //number of local generators
-CMAKE_NUMBER_OF_MAKEFILES:INTERNAL=2
+CMAKE_NUMBER_OF_MAKEFILES:INTERNAL=3
 //ADVANCED property for variable: CMAKE_OBJCOPY
 CMAKE_OBJCOPY-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_OBJDUMP

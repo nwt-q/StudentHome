@@ -31,7 +31,6 @@
 #include <cmath>
 #include <random>
 #include <windows.h>
-#define HOMEPATH "../resources"
 using namespace std;
 
 
@@ -40,11 +39,11 @@ namespace gameqoqo {
 	static double mapDeltaY = 0;
 
 	const string voiceSRC = "";				//背景音乐的文件路径
-	const string BackGround = "/Music/backgroundMusic.mp3";			//开始界面(菜单)背景的文件路径
+	const string BackGround = "../resources/background/5.jpg";			//开始界面(菜单)背景的文件路径
 	const int skinCount = 6;								//皮肤数量
 	string gamerSkins[skinCount] =
-	{ (HOMEPATH"/Skins/皮肤一.png") ,(HOMEPATH"/Skins/皮肤二.png"),(HOMEPATH"/Skins/皮肤三.png"),
-      (HOMEPATH"/Skins/皮肤五.png"),(HOMEPATH"/Skins/皮肤六.png") };	//玩家皮肤的文件路径
+	{ ("../resources/Skins/皮肤一.png") ,("../resources/Skins/皮肤二.png"),("../resources/Skins/皮肤三.png"),
+      ("../resources/Skins/皮肤五.png"),("../resources/Skins/皮肤六.png") };	//玩家皮肤的文件路径
 
 	int gamerSkinIndex = 0;							//玩家当前皮肤在数组中的索引，默认为第一个
 
@@ -895,7 +894,7 @@ namespace gameqoqo {
 		showButton(1050, 550, BUTTONW, BUTTONH, "进入设置", 48, fillColor, textColor);
 		showButton(20, 30, BUTTONW, BUTTONH, "退出游戏", 48, fillColor, textColor);
 		IMAGE Start;
-		loadimage(&Start,  (HOMEPATH"/Photo/Start1.jpg") , BUTTONW + 65, BUTTONH, true);//背景图片
+		loadimage(&Start,  "../resources/Photo/Start1.jpg" , BUTTONW + 65, BUTTONH, true);//背景图片
 		putimage(520, 550, &Start);
 
 		while (1)
@@ -918,7 +917,7 @@ namespace gameqoqo {
 				}
 				if (msg.message == WM_LBUTTONDOWN && inArea(msg.x, msg.y, 20, 30, BUTTONW, BUTTONH))
 				{
-					//ReturnStudent();
+					return ;
 				}
 			}
 		}
@@ -1294,6 +1293,7 @@ namespace gameqoqo {
 
 		settextstyle(96, 0, "华文行楷");//设置大小，字体
 		settextcolor(RGB(255, 255, 96));   //设置字体颜色
+
 		setbkmode(TRANSPARENT);    //透明底，不覆盖底图
 		outtextxy(200, 80, "游戏失败，你被吃掉了");  // 在 (100, 100) 的位置输出文本
 

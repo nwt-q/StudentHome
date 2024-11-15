@@ -17,10 +17,7 @@
  limitations under the License.
 */
 #pragma comment(lib,"WINMM.LIB")
-#include "../include/StudentView.h"
-//#include "../include/Star.h"
-#include "../include/game.h"
-using namespace gameqoqo;
+#include "../include/UserView.h"
 
 #undef UNICODE
 #undef _UNICODE
@@ -30,8 +27,10 @@ using namespace gameqoqo;
 * 创建时间 : 2024/6/6 12:10:55
 * 重构时间 : 2024/11/11 9:10:55
 */
+//menuView();
+
 int main() {
 	T();
-    
+    WindowController * a = new WindowController();
     return 0;
 }

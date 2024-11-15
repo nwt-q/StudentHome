@@ -1,9 +1,10 @@
 #pragma once
+
 /*
  Copyright WU DE QUAN. All rights reserved.
 
  @Author: EvLast
- @Date: 2024/6/12 1:54:26
+ @Date: 2024/6/7 0:20:30
 
  Licensed under the Apache License, Version 2.0 (the "License");
  you may not use this file except in compliance with the License.
@@ -18,45 +19,48 @@
  limitations under the License.
 */
 
+#ifndef _STUDENTVIEW_
+#define _STUDENTVIEW_
 
-#ifndef _ALL_
-#define _ALL_
-
-// -------------------- 数据设计 --------------------
-#include <graphics.h>
-#include<iostream>
-#include <conio.h>
-#include <string>
-#include <ctime>
-#include <cmath>
-#include <random>
-#include <windows.h>
-#include <fstream>
-#include <sstream>
-using namespace std;
-//------------------数据设计------------------
+#include "StudentModel.h"
+#include "graphics.h"
+//--------------------数据模块--------------------------
 
 
-/*
-	颜色：
-		R,G,B：颜色的RGB属性
-		随机颜色时，可以通过随机R，G，B来随机颜色
-*/
+struct  Color;
 
 
-//------------------数据设计------------------
 
 // -------------------- service --------------------
+// 后面重构成 QT
+class WindowController {
+public:
+    WindowController();
+    ~WindowController();
+
+    /*
+        功能： 应用第一页
+        参数：void
+        返回值：void
+    */
+    void ControlPage();
+
+    void ProductionGroupView();
+
+    void gameQoQoView();
+
+private:
+    int pageIndex = 1;
+};
+
 
 /*
-	负责人：
-	功能：初始化页面
-	参数：void
-	返回值：void
+    功能：确定是否登入成功,按钮 btnOK 的点击事件
+    参数：EasyTextBox* NEW
+    返回值：void
 */
-void init();
+void On_btnOk_Click();
 
 // -------------------- view --------------------
 
-
-#endif // !_ALL_
+#endif // ! _STUDENTVIEW_
